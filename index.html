@@ -6,6 +6,9 @@
   <title>Cardápio</title>
   <meta name="description" content="Peça pelo site e finalize pelo WhatsApp.">
   <meta name="theme-color" content="#f2f4f5">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
   <script>
     document.documentElement.classList.add('js', 'is-loading');
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -771,7 +774,7 @@ a.track-sc { text-decoration: none; color: inherit; }
 .top-acoes { display: flex; align-items: center; gap: 8px; margin-left: auto; flex: none; }
 
 /* ===== minimizado: sanfona por categoria + linhas simples ===== */
-.minacc { border-radius: 14px; background: var(--white); box-shadow: 0 1px 0 var(--border); overflow: hidden; margin: 0 14px 6px; }
+.minacc { border-radius: 14px; background: var(--white); box-shadow: 0 1px 0 var(--border); overflow: hidden; margin: 0 0 6px; }
 .cat__list:has(> .minacc) { gap: 0; }
 .minacc__head { display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 16px; text-align: left; }
 .minacc__head h2 { flex: 1; min-width: 0; font-size: 18px; letter-spacing: -.04em; margin: 0; }
@@ -1056,6 +1059,77 @@ a.track-sc { text-decoration: none; color: inherit; }
 .brand { line-height: 1.04; }
 .brand--2l { font-size: 26px; line-height: .95; }
 
+/* cabeçalho: nomes em linhas, reduzindo 2px quando não cabe */
+.topbar .brand { line-height: 1.04; }
+.topbar .brand br { display: block; content: ''; }
+.brand--2l { font-size: 26px !important; line-height: .95 !important; }
+.brand--3l { font-size: 24px !important; line-height: .95 !important; }
+
+/* nome + WhatsApp lado a lado */
+.row--nome { align-items: stretch; }
+.row__wpp { flex: 0 0 46%; min-width: 0; }
+
+/* escolha de bairro */
+.bairro-pick { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; text-align: left; cursor: pointer; }
+.bairro-pick__txt { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bairro-pick small { color: var(--muted); font-weight: 600; margin-left: 6px; }
+.modal--list { display: flex; flex-direction: column; gap: 10px; max-height: 82vh; text-align: left; }
+.modal--list h2, .modal--list p { text-align: left; }
+.bairro-lista { display: grid; gap: 8px; overflow: auto; max-height: 48vh; padding: 2px; }
+.bairro-op { display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%; padding: 14px 16px; border-radius: 14px; background: var(--white, #fff); border: 1px solid var(--line, #e5e5e5); color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.bairro-op span { font-weight: 600; }
+.bairro-op small { color: var(--muted); font-weight: 600; white-space: nowrap; }
+.bairro-op.is-on { border-color: var(--accent, #ffcc00); box-shadow: inset 0 0 0 2px var(--accent, #ffcc00); }
+.bairro-vazio { text-align: center; color: var(--muted); padding: 18px 0; }
+.bairro-pick { padding-left: 20px; padding-right: 18px; }
+
+/* bairros: cards 20% menores, busca 30% maior, lista mostra 4 bairros, texto igual aos outros campos */
+.bairro-op { padding: 10px 16px; }
+#bairroBusca { height: 62px; }
+.bairro-lista { max-height: 190px; }
+.modal--list { max-height: 88vh; max-height: 88dvh; }
+.bairro-pick, .bairro-pick__txt, .bairro-pick small { font-size: 16px; font-family: inherit; }
+.bairro-pick__txt { margin: 0; padding: 0; color: var(--ink); }
+.bairro-pick small { margin-left: 6px; }
+.field .bairro-pick .bairro-pick__txt { display: block; margin: 0 0 0 0; padding: 0; font-size: 16px; color: var(--ink); line-height: 1.3; }
+.field .bairro-pick small { display: inline; margin: 0 0 0 6px; font-size: 16px; color: var(--muted); font-weight: 600; }
+.bairro-op { padding: 9px 16px; }
+
+/* modal de bairro: sempre cabe na área visível (teclado), busca com altura fixa, 8 bairros sem teclado */
+.modal--list { display: flex; flex-direction: column; gap: 10px; max-height: 88vh; max-height: 88dvh; }
+.modal--list > * { flex-shrink: 0; }
+#bairroBusca { height: 62px; flex: 0 0 62px; }
+.bairro-lista { flex: 0 1 auto; min-height: 0; max-height: 386px; overflow: auto; }
+.modal--list.kb > p { display: none; }
+.modal--list.kb h2 { margin-bottom: 0; }
+body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+
+/* modal de bairro: busca na altura dos cards, menos espaço acima de Fechar, 10,5 bairros sem teclado e ~4,5 com teclado */
+#bairroBusca { height: 41px; flex: 0 0 41px; }
+.modal--list { max-height: 94vh; max-height: 94dvh; }
+.modal--list > .modal__actions { margin: 0; }
+.bairro-lista { max-height: 520px; }
+.modal--list.kb { padding: 16px 18px; gap: 8px; }
+.modal--list.kb h2, .modal--list.kb > p { display: none; }
+.modal--list.kb > .modal__actions .btn { height: 40px; min-height: 40px; }
+.modal--list.kb .bairro-lista { max-height: 220px; }
+
+/* logo com dois nomes empilhados: menor */
+.topbar .brand.brand--2l { font-size: 24px !important; line-height: .95 !important; }
+.topbar .brand.brand--3l { font-size: 22px !important; line-height: .95 !important; }
+
+/* botão Pedir agora vira contador quando o item já está na sacola */
+.hero-stepper { margin: 0 auto; }
+
+/* contador do Pedir agora: mesmo tamanho do botão */
+.hero-stepper { width: 138px; height: 52px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 6px; border-radius: var(--r-pill); }
+.hero-stepper button { width: 40px; height: 40px; border-radius: 50%; }
+
+/* contador do Pedir agora ocupa o mesmo espaço do botão, sem mexer no layout */
+.hero-slot { position: relative; display: inline-flex; }
+.hero-slot[hidden] { display: none; }
+.hero-stepper { position: absolute; inset: 0; margin: 0; }
+
 </style>
 </head>
 
@@ -1112,7 +1186,10 @@ a.track-sc { text-decoration: none; color: inherit; }
       <p class="hero__sub" id="heroSub" data-in style="--d:.15s"></p>
       <div class="hero__cta" data-in style="--d:.25s">
         <a class="btn btn--light ripple" href="#cardapio" id="heroVer">Ver cardápio</a>
-        <button class="btn btn--primary ripple" type="button" id="heroBtn" hidden>Pedir agora</button>
+        <div class="hero-slot" id="heroSlot" hidden>
+          <button class="btn btn--primary ripple" type="button" id="heroBtn">Pedir agora</button>
+          <div class="stepper hero-stepper" id="heroStep" hidden></div>
+        </div>
       </div>
     </section>
 
@@ -1174,7 +1251,7 @@ a.track-sc { text-decoration: none; color: inherit; }
       <b id="barCount">0</b>
     </span>
     <span class="cartbar__txt"><small>Total da sacola</small><strong id="barTotal">R$ 0,00</strong></span>
-    <span class="cartbar__go">Finalizar</span>
+    <span class="cartbar__go">Prosseguir</span>
   </button>
 
   <!-- ========== SACOLA / CHECKOUT ========== -->
@@ -1214,8 +1291,13 @@ a.track-sc { text-decoration: none; color: inherit; }
           <input class="input" id="fMesa" type="text" inputmode="numeric" placeholder="Número da mesa" aria-label="Número da mesa">
         </div>
 
-        <div class="field">
+        <div class="row row--nome">
+        <div class="field row__grow">
           <input class="input" id="fNome" type="text" autocomplete="name" placeholder="Seu nome" aria-label="Seu nome">
+        </div>
+        <div class="field row__wpp">
+          <input class="input" id="fWpp" type="tel" inputmode="tel" autocomplete="tel" placeholder="WhatsApp" aria-label="WhatsApp">
+        </div>
         </div>
 
         <div id="fEndWrap">
@@ -1276,6 +1358,14 @@ a.track-sc { text-decoration: none; color: inherit; }
     <p><b>Android (Chrome):</b> toque no ⋮ do navegador e escolha <b>Instalar app</b> ou <b>Adicionar à tela inicial</b>.</p>
     <p><b>iPhone (Safari):</b> toque em <b>Compartilhar</b> e depois em <b>Adicionar à Tela de Início</b>.</p>
     <div class="modal__actions"><button class="btn btn--primary btn--block ripple" type="button" id="appOk">Entendi</button></div>
+  </section>
+
+  <section class="modal modal--list" id="mBairro" role="dialog" aria-modal="true" aria-labelledby="bairroTitle">
+    <h2 id="bairroTitle">Escolha seu bairro</h2>
+    <p>Confira a taxa de entrega de cada bairro.</p>
+    <input class="input" id="bairroBusca" type="search" placeholder="Buscar bairro" aria-label="Buscar bairro">
+    <div class="bairro-lista" id="bairroLista"></div>
+    <div class="modal__actions"><button class="btn btn--block ripple" type="button" data-close>Fechar</button></div>
   </section>
 
   <section class="modal" id="mDone" role="dialog" aria-modal="true" aria-labelledby="doneTitle">
@@ -1361,6 +1451,7 @@ const BACKEND = {
 const LOJAS_DOMINIO = {
   'hamburgue.com.br': 'burguejua',
   'delivery-site.juaba.workers.dev': 'burguejua',
+  'jsbolo.juaba.workers.dev': 'jsbolo',
   'pizza.com.br': 'outraloja'          // troque pelo slug real da loja de pizza
 };
 const SLUG_TESTE = 'burguejua';        // só para testar em localhost: ?loja=slug
@@ -1426,13 +1517,18 @@ const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const hl = s => esc(s).replace(/\/([^\/]+)\//g, '<span class="free">$1</span>');   // /texto/ fica destacado
 const brandHTML = n => esc(n || 'Cardápio').split('.').join('<span>.</span>');
+const nomeEmLinhas = n => esc(n || 'Cardápio').split(' ').map(w => w.split('.').join('<span>.</span>')).join('<br>');
 function fitBrand() {
-  $$('.brand').forEach(el => {
-    el.classList.remove('brand--2l');
-    const cs = getComputedStyle(el);
-    const lh = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize);
-    if (el.getBoundingClientRect().height > lh * 1.5) el.classList.add('brand--2l');
-  });
+  const el = document.querySelector('.topbar .brand');
+  if (!el) return;
+  el.classList.remove('brand--2l', 'brand--3l');
+  el.style.width = 'max-content';
+  const bar = el.parentElement;
+  const outros = [...bar.children].filter(c => !c.contains(el)).reduce((a, c) => a + c.getBoundingClientRect().width + 8, 0);
+  const avail = bar.clientWidth - outros - 8;
+  if (el.querySelector('br') || el.getBoundingClientRect().width > avail) el.classList.add('brand--2l');
+  if (el.getBoundingClientRect().width > avail) el.classList.add('brand--3l');
+  el.style.width = '';
 }
 window.addEventListener('resize', fitBrand);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1552,9 +1648,22 @@ async function carregarDados() {
   montaDados(cats, prods);
 }
 
+/* ===== ANIMAÇÃO DO LOADING: peças empilhadas de baixo para cima (mesmo efeito para todos os tipos) ===== */
+let loaderAtual = null;
+const LOADERS = {"hamburguer": {"vb": "0 0 96 102", "c": ["<g transform=\"translate(0,86)\"><path d=\"M0 0 H96 V10 Q96 16 88 16 H8 Q0 16 0 10 Z\" fill=\"#e2a955\"/></g>", "<g transform=\"translate(0,63)\"><rect x=\"0\" y=\"0\" width=\"96\" height=\"20\" rx=\"10\" fill=\"#5b3a29\"/></g>", "<g transform=\"translate(0,52)\"><rect x=\"-4\" y=\"0\" width=\"104\" height=\"8\" rx=\"3\" fill=\"#f4b942\"/></g>", "<g transform=\"translate(0,39)\"><path d=\"M-2 0 Q5 -6 12 0 T26 0 T40 0 T54 0 T68 0 T82 0 T98 0 V10 H-2 Z\" fill=\"#a3b88c\"/></g>", "<g transform=\"translate(0,0)\"><path d=\"M0 36 C0 12 20 0 48 0 C76 0 96 12 96 36 Z\" fill=\"#e8b56a\"/></g>"]}, "pizza": {"vb": "0 0 96 96", "c": ["<ellipse cx=\"48\" cy=\"84\" rx=\"46\" ry=\"9\" fill=\"#e7e9ee\"/>", "<ellipse cx=\"48\" cy=\"72\" rx=\"42\" ry=\"12\" fill=\"#d9974a\"/>", "<ellipse cx=\"48\" cy=\"68\" rx=\"36\" ry=\"9\" fill=\"#f4c95d\"/>", "<circle cx=\"32\" cy=\"66\" r=\"6\" fill=\"#c0392b\"/><circle cx=\"52\" cy=\"62\" r=\"5.5\" fill=\"#c0392b\"/><circle cx=\"66\" cy=\"70\" r=\"6\" fill=\"#c0392b\"/>"]}, "hotdog": {"vb": "0 0 96 96", "c": ["<rect x=\"0\" y=\"62\" width=\"96\" height=\"16\" rx=\"8\" fill=\"#e0a458\"/>", "<rect x=\"-2\" y=\"48\" width=\"100\" height=\"18\" rx=\"9\" fill=\"#b5472d\"/>", "<path d=\"M4 58 L12 52 L20 58 L28 52 L36 58 L44 52 L52 58 L60 52 L68 58 L76 52 L84 58 L92 52\" fill=\"none\" stroke=\"#f2c230\" stroke-width=\"4\" stroke-linejoin=\"round\"/>", "<rect x=\"0\" y=\"24\" width=\"96\" height=\"24\" rx=\"12\" fill=\"#e8b56a\"/>"]}, "bolo": {"vb": "0 0 96 96", "c": ["<ellipse cx=\"48\" cy=\"88\" rx=\"44\" ry=\"6\" fill=\"#e7e9ee\"/>", "<rect x=\"8\" y=\"64\" width=\"80\" height=\"22\" rx=\"4\" fill=\"#b86b3c\"/>", "<rect x=\"8\" y=\"56\" width=\"80\" height=\"9\" rx=\"4.5\" fill=\"#fff3e0\"/>", "<rect x=\"20\" y=\"36\" width=\"56\" height=\"22\" rx=\"4\" fill=\"#c98a52\"/>", "<rect x=\"20\" y=\"29\" width=\"56\" height=\"10\" rx=\"5\" fill=\"#fff3e0\"/>", "<rect x=\"32\" y=\"12\" width=\"32\" height=\"20\" rx=\"4\" fill=\"#b86b3c\"/>", "<rect x=\"32\" y=\"6\" width=\"32\" height=\"9\" rx=\"4.5\" fill=\"#fff3e0\"/>", "<circle cx=\"48\" cy=\"5\" r=\"4.5\" fill=\"#d62e2e\"/>"]}, "prato": {"vb": "0 0 96 96", "c": ["<ellipse cx=\"48\" cy=\"84\" rx=\"46\" ry=\"8\" fill=\"#e7e9ee\"/>", "<path d=\"M8 82 C8 40 26 22 48 22 C70 22 88 40 88 82 Z\" fill=\"#c9ced6\"/>", "<path d=\"M22 66 C24 52 32 42 42 38\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"4\" stroke-linecap=\"round\" opacity=\".7\"/>", "<circle cx=\"48\" cy=\"18\" r=\"6\" fill=\"#9aa3b0\"/>"]}, "sorvete": {"vb": "0 0 96 96", "c": ["<path d=\"M26 52 H70 L48 94 Z\" fill=\"#d9a35f\"/><path d=\"M34 60 L52 84 M62 60 L44 84\" stroke=\"#b07a3c\" stroke-width=\"2\" fill=\"none\"/>", "<ellipse cx=\"48\" cy=\"48\" rx=\"28\" ry=\"14\" fill=\"#f2b8c6\"/>", "<circle cx=\"48\" cy=\"32\" r=\"20\" fill=\"#a7e0c4\"/>", "<circle cx=\"48\" cy=\"10\" r=\"5\" fill=\"#d62e2e\"/>"]}};
+function montaLoader(tipo) {
+  const L = LOADERS[tipo] || LOADERS.hamburguer;
+  if (loaderAtual === tipo) return;
+  const box = $('#loader .loader__burger'); if (!box) return;
+  loaderAtual = tipo;
+  box.innerHTML = `<svg viewBox="${L.vb}" aria-hidden="true" style="width:96px;height:auto;display:block;overflow:visible">${L.c.map((c, i) => `<g class="lb" style="animation-delay:${(0.1 + i * 0.2).toFixed(1)}s;transform-box:fill-box;transform-origin:50% 50%">${c}</g>`).join('')}</svg>`;
+}
+function lerLoaderLocal() { try { return localStorage.getItem('loader_tipo') || 'hamburguer'; } catch (e) { return 'hamburguer'; } }
+
 /* ===== 5. APARÊNCIA (cores, marca e textos vindos do painel) ===== */
 function applyVisual() {
   const V = CFG.site_visual || {}, c = V.cores || {}, r = document.documentElement.style;
+  if (V.loader) { montaLoader(V.loader); try { localStorage.setItem('loader_tipo', V.loader); } catch (e) {} }
   if (c.bg) { r.setProperty('--canvas', c.bg); $('meta[name="theme-color"]').content = c.bg; }
   const cs = (k, v) => { if (v) r.setProperty(k, v); };
   cs('--muted', c.muted); cs('--c-round', c.btnRound); cs('--c-pill', c.btnPill);
@@ -1577,7 +1686,8 @@ function applyVisual() {
   }
   const nome = V.nome || LOJA.nome || 'Cardápio';
   document.title = nome + ' | Cardápio';
-  $$('.brand').forEach(el => { el.innerHTML = brandHTML(nome); });
+  $$('.topbar .brand').forEach(el => { el.innerHTML = nomeEmLinhas(nome); });
+  $$('.brand:not(.topbar .brand)').forEach(el => { el.innerHTML = brandHTML(nome); });
   fitBrand();
   $$('.loader__brand').forEach(el => { el.innerHTML = brandHTML(nome); });
   $('#doneIco').innerHTML = ico('party');
@@ -1847,10 +1957,12 @@ function renderHero() {
   const alvo2 = acao2 === 'aba' ? secDeCat(Number(T.aba2)) : null;
   const addId = item2 ? item2.id : (main ? main.id : null);
   btn.textContent = T.b2 || 'Pedir agora';
+  btn.dataset.show = dest.length ? '1' : '0';
   btn.hidden = !dest.length;
   btn.onclick = alvo2 ? () => scrollToId(alvo2) : null;
   if (!alvo2 && addId) btn.setAttribute('data-add', addId);
   else btn.removeAttribute('data-add');
+  syncHeroCtrl();
 }
 
 /* oferta com prazo: enquanto ativa, o preço é o da oferta (o antigo aparece riscado). Quando o prazo acaba, volta o preço antigo */
@@ -2072,7 +2184,7 @@ const taxaDoBairro = nome => {
   const f = L.find(x => norm(x[0]) === norm(nome));
   return f ? (Number(f[1]) || 0) : 0;
 };
-const bairroVal = () => { const el = $('#fBairro'); return el ? el.value.trim() : ''; };
+const bairroVal = () => { const el = $('#fBairro'); if (!el) return ''; return el.tagName === 'BUTTON' ? (el.dataset.v || '') : el.value.trim(); };
 
 /* { valor: número | null (a combinar), txt } */
 function frete(sub) {
@@ -2153,7 +2265,24 @@ function ctrlHTML(id) {
     <button class="ripple" type="button" data-inc="${id}" aria-label="Adicionar mais um">+</button>
   </div>`;
 }
+function syncHeroCtrl() {
+  const btn = $('#heroBtn'), st = $('#heroStep');
+  if (!btn || !st) return;
+  const id = btn.dataset.add, q = id ? (cart[id] || 0) : 0;
+  const slot = $('#heroSlot');
+  if (q) {
+    btn.style.visibility = 'hidden';
+    st.hidden = false;
+    st.innerHTML = `<button class="ripple" type="button" data-dec="${id}" aria-label="Remover um">−</button><span>${q}</span><button class="ripple" type="button" data-inc="${id}" aria-label="Adicionar mais um">+</button>`;
+  } else {
+    st.hidden = true;
+    st.innerHTML = '';
+    btn.style.visibility = '';
+  }
+  if (slot) slot.hidden = btn.dataset.show !== '1';
+}
 function syncControls() {
+  syncHeroCtrl();
   $$('[data-ctrl]').forEach(el => {
     const id = el.dataset.ctrl, q = cart[id] || 0;
     if (el.dataset.q === String(q)) return;
@@ -2204,18 +2333,70 @@ function renderBairros(valor) {
   const L = bairrosLista(), wrap = $('#bairroWrap');
   const atual = valor ?? bairroVal();
   if (L) {
-    wrap.innerHTML = `<select class="input" id="fBairro" aria-label="Bairro"><option value="">Escolha seu bairro</option>${L.map(([n, t]) =>
-      `<option value="${esc(n)}">${esc(n)} — ${Number(t) > 0 ? brl(t) : 'Grátis'}</option>`).join('')}</select>`;
-    $('#fBairro').value = L.some(x => x[0] === atual) ? atual : '';
+    const sel = L.find(x => x[0] === atual);
+    wrap.innerHTML = `<button class="input bairro-pick" id="fBairro" type="button" data-v="${sel ? esc(sel[0]) : ''}" aria-haspopup="dialog"><span class="bairro-pick__txt">${sel ? `${esc(sel[0])} <small>${Number(sel[1]) > 0 ? brl(sel[1]) : 'Grátis'}</small>` : 'Escolha seu bairro'}</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>`;
+    $('#fBairro').addEventListener('click', openBairroModal);
   } else {
     wrap.innerHTML = '<input class="input" id="fBairro" type="text" placeholder="Bairro" aria-label="Bairro">';
     $('#fBairro').value = atual;
   }
 }
 
+function setBairroSel(nome) {
+  const el = $('#fBairro'); if (!el) return;
+  const L = bairrosLista() || [], sel = L.find(x => x[0] === nome);
+  el.dataset.v = sel ? sel[0] : '';
+  el.querySelector('.bairro-pick__txt').innerHTML = sel ? `${esc(sel[0])} <small>${Number(sel[1]) > 0 ? brl(sel[1]) : 'Grátis'}</small>` : 'Escolha seu bairro';
+  renderCart();
+  updateFinishBtn();
+}
+const semAcento = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+function fitBairroModal() {
+  const m = $('#mBairro');
+  if (!m || !m.classList.contains('is-open')) return;
+  const vv = window.visualViewport;
+  const h = vv ? vv.height : innerHeight, top = vv ? vv.offsetTop : 0;
+  m.style.top = (top + 12) + 'px';
+  m.style.transform = 'translateX(-50%)';
+  m.style.maxHeight = (h - 24) + 'px';
+  m.classList.toggle('kb', h < 620);
+}
+if (window.visualViewport) { visualViewport.addEventListener('resize', fitBairroModal); visualViewport.addEventListener('scroll', fitBairroModal); }
+function openBairroModal() {
+  const L = bairrosLista() || [];
+  const atual = bairroVal();
+  const busca = $('#bairroBusca');
+  busca.value = '';
+  const desenha = () => {
+    const q = semAcento(busca.value.trim());
+    let lista = L;
+    if (q) {
+      const ini = L.filter(([n]) => semAcento(n).startsWith(q));
+      const meio = L.filter(([n]) => !semAcento(n).startsWith(q) && semAcento(n).includes(q));
+      lista = [...ini, ...meio];
+    }
+    $('#bairroLista').innerHTML = lista.length ? lista.map(([n, t]) => `
+      <button type="button" class="bairro-op${n === atual ? ' is-on' : ''}" data-bairro="${esc(n)}">
+        <span>${esc(n)}</span><small>${Number(t) > 0 ? brl(t) : 'Grátis'}</small>
+      </button>`).join('') : '<p class="bairro-vazio">Nenhum bairro com esse nome.</p>';
+  };
+  desenha();
+  busca.oninput = desenha;
+  busca.onfocus = fitBairroModal;
+  openModal('mBairro');
+  fitBairroModal();
+}
+$('#mBairro [data-close]').addEventListener('click', closeModals);
+$('#bairroLista').addEventListener('click', e => {
+  const b = e.target.closest('[data-bairro]'); if (!b) return;
+  setBairroSel(b.dataset.bairro);
+  closeModals();
+});
+
 function formOk() {
   const v = id => ($('#' + id)?.value || '').trim();
   if (!v('fNome')) return false;
+  if (v('fWpp').replace(/\D/g, '').length < 10) return false;
   if (mode === 'entrega' && (!bairroVal() || !v('fRua') || !v('fNum'))) return false;
   if (pay === 'Dinheiro') {
     if (!troco) return false;
@@ -2274,6 +2455,7 @@ function montaTexto(d, c, fr, server, ref) {
     LINHA,
     `*${tipoLabel}*`,
     `*NOME:* ${d.nome}`,
+    d.wpp ? `*WHATSAPP:* ${d.wpp}` : null,
     d.tipo === 'entrega' ? `*ENDEREÇO:* ${d.rua}, ${d.num} - ${d.bairro}` : null,
     LINHA,
     '',
@@ -2304,6 +2486,7 @@ async function finalizar() {
 
   const v = id => ($('#' + id)?.value || '').trim();
   if (!v('fNome')) return invalid('#fNome', 'Diga seu nome para continuarmos');
+  if (v('fWpp').replace(/\D/g, '').length < 10) return invalid('#fWpp', 'Informe seu WhatsApp com DDD');
   if (mode === 'entrega') {
     if (!bairroVal()) return invalid('#fBairro', 'Informe o bairro');
     if (!v('fRua')) return invalid('#fRua', 'Informe a rua');
@@ -2315,11 +2498,11 @@ async function finalizar() {
     if (troco === 'sim' && !v('fTroco')) return invalid('#fTroco', 'Troco para quanto?');
   }
 
-  store.set('cliente:' + (LOJA.id || 'demo'), { nome: v('fNome'), bairro: bairroVal(), rua: v('fRua'), num: v('fNum') });
+  store.set('cliente:' + (LOJA.id || 'demo'), { nome: v('fNome'), wpp: v('fWpp'), bairro: bairroVal(), rua: v('fRua'), num: v('fNum') });
 
   const c = calc(), fr = frete(c.sub);
   const d = {
-    nome: v('fNome'), tipo: mode === 'entrega' ? 'entrega' : 'retirada',
+    nome: v('fNome'), wpp: v('fWpp').replace(/\D/g, ''), tipo: mode === 'entrega' ? 'entrega' : 'retirada',
     bairro: mode === 'entrega' ? bairroVal() : '', rua: mode === 'entrega' ? v('fRua') : '', num: mode === 'entrega' ? v('fNum') : '',
     pag: pay, troco: pay === 'Dinheiro' ? (troco === 'sim' ? v('fTroco') : 'sem troco') : '', obs: (mode === 'mesa' ? `MESA ${v('fMesa')}. ` : '') + v('fObs')
   };
@@ -2422,8 +2605,13 @@ const revealIO = new IntersectionObserver(entries => {
 }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
 const observeReveals = () => $$('.reveal:not(.is-in)').forEach(el => revealIO.observe(el));
 
+/* tempo que a animação leva (última camada termina) + 1s parada antes de entrar no site */
+function tempoLoader() {
+  const n = (LOADERS[loaderAtual] || LOADERS.hamburguer).c.length;
+  return (0.1 + (n - 1) * 0.2 + 0.5) * 1000 + 1000;
+}
 function hideLoader() {
-  const minTime = new Promise(r => setTimeout(r, reduced ? 200 : 1200));
+  const minTime = new Promise(r => setTimeout(r, reduced ? 200 : tempoLoader()));
   const loaded = new Promise(r => {
     if (document.readyState === 'complete') r(); else addEventListener('load', r, { once: true });
     setTimeout(r, 3500);
@@ -2493,13 +2681,14 @@ function setActivePill(idx) {
   });
 }
 function measureSticky() {
-  const h = $('#topbar').offsetHeight + $('#stickNav').offsetHeight;
+  const av = FECHADA ? ($('#lojaAviso')?.offsetHeight || 0) : 0;
+  const h = $('#topbar').offsetHeight + av + $('#stickNav').offsetHeight;
   document.documentElement.style.setProperty('--stick', h + 'px');
 }
 function initScrollSpy() {
   const spy = new IntersectionObserver(entries => {
     entries.forEach(en => { if (en.isIntersecting) setActivePill(en.target.dataset.cat); });
-  }, { rootMargin: `-${$('#topbar').offsetHeight + $('#stickNav').offsetHeight + 8}px 0px -65% 0px` });
+  }, { rootMargin: `-${$('#topbar').offsetHeight + (FECHADA ? ($('#lojaAviso')?.offsetHeight || 0) : 0) + $('#stickNav').offsetHeight + 8}px 0px -65% 0px` });
   $$('.cat').forEach(sec => spy.observe(sec));
 }
 
@@ -2641,6 +2830,7 @@ function hydrate() {
   const c = store.get('cliente:' + (LOJA.id || 'demo'), null) || {};
   renderBairros(c.bairro || '');
   $('#fNome').value = c.nome || '';
+  $('#fWpp').value = c.wpp || '';
   $('#fRua').value = c.rua || '';
   $('#fNum').value = c.num || '';
   $('#fEndWrap').hidden = mode !== 'entrega';
@@ -2867,6 +3057,7 @@ function fechaDone() {
 
 let deferredInstall = null;
 addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstall = e; });
+if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
 
 /* ===== 12b. PÁGINA DE GRADE DE FOTOS (fotos pequenas, 4 colunas) ===== */
 /* itens de uma subcategoria, na exibição dela (grade, fotos, minimizado, card...) */
@@ -2990,6 +3181,7 @@ function closeGrade() { $('#gradePage').classList.remove('is-open'); unlockIfIdl
 /* ===== 13. INIT ===== */
 async function init() {
   bindEvents();
+  montaLoader(lerLoaderLocal());
   try {
     await carregarDados();
   } catch (e) {
