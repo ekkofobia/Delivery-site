@@ -1671,6 +1671,7 @@ function aplicaModos() {
   const ativos = ['entrega', 'retirada', 'mesa'].filter(k => M[k]);
   if (!ativos.length) return;
   $$('[data-mode]').forEach(b => { b.style.display = M[b.dataset.mode] ? '' : 'none'; });
+  const seg = $('.seg'); if (seg) seg.style.gridTemplateColumns = `repeat(${ativos.length}, minmax(0, 1fr))`;
   if (!M[mode]) {
     mode = ativos[0];
     $$('[data-mode]').forEach(b => b.classList.toggle('is-on', b.dataset.mode === mode));
