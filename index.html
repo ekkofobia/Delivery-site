@@ -1665,7 +1665,21 @@ function montaLoader(tipo) {
 function lerLoaderLocal() { try { return localStorage.getItem('loader_tipo') || 'hamburguer'; } catch (e) { return 'hamburguer'; } }
 
 /* ===== 5. APARÊNCIA (cores, marca e textos vindos do painel) ===== */
+/* tipos de pedido que a loja trabalha (painel > Configurações). Sem config = todos */
+function aplicaModos() {
+  const M = Object.assign({ entrega: true, retirada: true, mesa: true }, CFG.modos || {});
+  const ativos = ['entrega', 'retirada', 'mesa'].filter(k => M[k]);
+  if (!ativos.length) return;
+  $$('[data-mode]').forEach(b => { b.style.display = M[b.dataset.mode] ? '' : 'none'; });
+  if (!M[mode]) {
+    mode = ativos[0];
+    $$('[data-mode]').forEach(b => b.classList.toggle('is-on', b.dataset.mode === mode));
+    $('#fEndWrap').hidden = mode !== 'entrega';
+    if ($('#fMesaWrap')) $('#fMesaWrap').hidden = mode !== 'mesa';
+  }
+}
 function applyVisual() {
+  aplicaModos();
   const V = CFG.site_visual || {}, c = V.cores || {}, r = document.documentElement.style;
   if (V.loader) { montaLoader(V.loader); try { localStorage.setItem('loader_tipo', V.loader); } catch (e) {} }
   if (c.bg) { r.setProperty('--canvas', c.bg); $('meta[name="theme-color"]').content = c.bg; }
