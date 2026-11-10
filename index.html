@@ -1130,6 +1130,19 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
 .hero-slot[hidden] { display: none; }
 .hero-stepper { position: absolute; inset: 0; margin: 0; }
 
+/* pagamento: 3 opções centralizadas e um pouco mais largas */
+.pay-chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.pay-chips .chip { width: 100%; height: 46px; padding: 0 8px; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+/* troco: Sim/Não e o campo de valor na mesma linha */
+.troco-row { display: flex; gap: 8px; align-items: center; margin-bottom: 16px; }
+.troco-row .chips { margin: 0; flex: none; }
+.troco-row .field { flex: 1; min-width: 0; margin: 0; }
+.troco-row .input { height: 40px; }
+
+/* checklists: cada grupo em um card separado */
+.chk-card { background: var(--white); border-radius: 22px; padding: 14px 14px 10px; margin: 14px 0; box-shadow: var(--shadow-sm); }
+.chk-card .sub-h { margin-top: 4px; }
+
 </style>
 </head>
 
@@ -1313,7 +1326,7 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
         </div>
 
         <p class="field__label">Pagamento</p>
-        <div class="chips" role="group" aria-label="Forma de pagamento">
+        <div class="chips pay-chips" role="group" aria-label="Forma de pagamento">
           <button type="button" class="chip is-on" data-pay="Pix">Pix</button>
           <button type="button" class="chip" data-pay="Cartão na entrega">Cartão</button>
           <button type="button" class="chip" data-pay="Dinheiro">Dinheiro</button>
@@ -1321,12 +1334,14 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
 
         <div id="trocoBox" hidden>
           <p class="field__label">Precisa de troco?</p>
-          <div class="chips" role="group" aria-label="Precisa de troco?">
-            <button type="button" class="chip" data-troco="sim">Sim</button>
-            <button type="button" class="chip" data-troco="nao">Não</button>
-          </div>
-          <div class="field" id="trocoValWrap" hidden>
-            <input class="input" id="fTroco" type="text" inputmode="decimal" placeholder="Troco para quanto? Ex.: R$ 50" aria-label="Troco para quanto">
+          <div class="troco-row">
+            <div class="chips" role="group" aria-label="Precisa de troco?">
+              <button type="button" class="chip" data-troco="sim">Sim</button>
+              <button type="button" class="chip" data-troco="nao">Não</button>
+            </div>
+            <div class="field" id="trocoValWrap" hidden>
+              <input class="input" id="fTroco" type="text" inputmode="decimal" placeholder="Troco para quanto? Ex.: R$ 50" aria-label="Troco para quanto">
+            </div>
           </div>
         </div>
 
@@ -2193,13 +2208,12 @@ function addToCart(id, sourceEl) {
   buzz(12);
 }
 
-const bairrosLista = () => {
-  const ent = CFG.entrega || {};
-  return (!ent.combinar && Array.isArray(CFG.bairros)) ? CFG.bairros : null;   // null = taxa a combinar
-};
+const combinarEntrega = () => !!((CFG.entrega || {}).combinar);   // frete a combinar: lista de bairros continua, sem preço
+const precoBairro = t => combinarEntrega() ? 'Frete a combinar' : (Number(t) > 0 ? brl(t) : 'Grátis');
+const bairrosLista = () => Array.isArray(CFG.bairros) ? CFG.bairros : null;
 const taxaDoBairro = nome => {
   const L = bairrosLista();
-  if (!L) return null;
+  if (!L || combinarEntrega()) return null;
   const f = L.find(x => norm(x[0]) === norm(nome));
   return f ? (Number(f[1]) || 0) : 0;
 };
@@ -2209,7 +2223,7 @@ const bairroVal = () => { const el = $('#fBairro'); if (!el) return ''; return e
 function frete(sub) {
   if (mode !== 'entrega') return { valor: 0, txt: 'Retirada' };
   if (!count()) return { valor: 0, txt: brl(0) };
-  if (!bairrosLista()) return { valor: null, txt: 'A combinar' };
+  if (!bairrosLista() || combinarEntrega()) return { valor: null, txt: 'Frete a combinar' };
   const b = bairroVal();
   if (!b) return { valor: null, txt: 'Escolha o bairro' };
   const g = Number((CFG.entrega || {}).gratis_acima) || 0;
@@ -2256,7 +2270,7 @@ function renderCart() {
 
   const g = Number((CFG.entrega || {}).gratis_acima) || 0;
   const fb = $('#freebar');
-  fb.hidden = !(mode === 'entrega' && g > 0);
+  fb.hidden = !(mode === 'entrega' && g > 0 && !combinarEntrega());
   if (!fb.hidden) {
     const falta = g - c.sub;
     $('#freeTxt').textContent = falta > 0 ? `Faltam ${brl(falta)} para a entrega grátis` : 'Você ganhou entrega grátis!';
@@ -2353,7 +2367,7 @@ function renderBairros(valor) {
   const atual = valor ?? bairroVal();
   if (L) {
     const sel = L.find(x => x[0] === atual);
-    wrap.innerHTML = `<button class="input bairro-pick" id="fBairro" type="button" data-v="${sel ? esc(sel[0]) : ''}" aria-haspopup="dialog"><span class="bairro-pick__txt">${sel ? `${esc(sel[0])} <small>${Number(sel[1]) > 0 ? brl(sel[1]) : 'Grátis'}</small>` : 'Escolha seu bairro'}</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>`;
+    wrap.innerHTML = `<button class="input bairro-pick" id="fBairro" type="button" data-v="${sel ? esc(sel[0]) : ''}" aria-haspopup="dialog"><span class="bairro-pick__txt">${sel ? `${esc(sel[0])} <small>${precoBairro(sel[1])}</small>` : 'Escolha seu bairro'}</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>`;
     $('#fBairro').addEventListener('click', openBairroModal);
   } else {
     wrap.innerHTML = '<input class="input" id="fBairro" type="text" placeholder="Bairro" aria-label="Bairro">';
@@ -2365,7 +2379,7 @@ function setBairroSel(nome) {
   const el = $('#fBairro'); if (!el) return;
   const L = bairrosLista() || [], sel = L.find(x => x[0] === nome);
   el.dataset.v = sel ? sel[0] : '';
-  el.querySelector('.bairro-pick__txt').innerHTML = sel ? `${esc(sel[0])} <small>${Number(sel[1]) > 0 ? brl(sel[1]) : 'Grátis'}</small>` : 'Escolha seu bairro';
+  el.querySelector('.bairro-pick__txt').innerHTML = sel ? `${esc(sel[0])} <small>${precoBairro(sel[1])}</small>` : 'Escolha seu bairro';
   renderCart();
   updateFinishBtn();
 }
@@ -2396,7 +2410,7 @@ function openBairroModal() {
     }
     $('#bairroLista').innerHTML = lista.length ? lista.map(([n, t]) => `
       <button type="button" class="bairro-op${n === atual ? ' is-on' : ''}" data-bairro="${esc(n)}">
-        <span>${esc(n)}</span><small>${Number(t) > 0 ? brl(t) : 'Grátis'}</small>
+        <span>${esc(n)}</span><small>${precoBairro(t)}</small>
       </button>`).join('') : '<p class="bairro-vazio">Nenhum bairro com esse nome.</p>';
   };
   desenha();
@@ -2425,8 +2439,7 @@ function formOk() {
 }
 function updateFinishBtn() {
   const b = $('#btnFinish');
-  const ok = count() > 0 && formOk() && !FECHADA;
-  b.disabled = !ok;
+  b.disabled = FECHADA;   // sempre clicável; campos faltando são indicados ao clicar
   $('#btnFinishTxt').textContent = FECHADA ? 'Loja fechada agora'
     : (formOk() ? 'Enviar pedido pelo WhatsApp' : 'Preencha os dados para prosseguir');
 }
@@ -3096,6 +3109,7 @@ const rowMinHTML = p => `
   </div>`;
 /* sub minimizado: ícone, título, "a partir de" + preço e seta */
 function subBlockHTML(b) {
+  if (b.exibicao === 'checklist') return `<div class="chk-card"><h3 class="sub-h">${esc(b.nome)}</h3>${subItensHTML(b)}</div>`;
   if (b.exibicao !== 'min') return `<h3 class="sub-h">${esc(b.nome)}</h3>${subItensHTML(b)}`;
   const menor = Math.min(...b.itens.map(p => p.preco));
   return `
@@ -3167,7 +3181,10 @@ function openPrato(id) {
   const n = c.itens.length + c.subs.reduce((a, b) => a + b.itens.length, 0);
   $('#gradeTitle').textContent = c.nome;
   $('#gradeSub').textContent = (c.desc ? c.desc + ' · ' : '') + n + (n === 1 ? ' item' : ' itens');
-  let h = `<div class="cat__list prato-page">${c.itens.map((p, i) => cardHTML(p, i, true)).join('')}</div>`;
+  // prato com um único item: já entra na sacola escolhido, sem card no topo
+  const auto = c.itens.length === 1 ? c.itens[0] : null;
+  if (auto && !cart[auto.id]) change(auto.id, 1);
+  let h = auto ? '' : `<div class="cat__list prato-page">${c.itens.map((p, i) => cardHTML(p, i, true)).join('')}</div>`;
   h += subBlocksHTML(c.subs);
   $('#gradeList').className = 'cat__list prato-page';   // lista de 1 coluna (não a grade de 4)
   $('#gradeList').innerHTML = h;
