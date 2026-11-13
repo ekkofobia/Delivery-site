@@ -1061,6 +1061,7 @@ a.track-sc { text-decoration: none; color: inherit; }
 
 /* cabeçalho: nomes em linhas, reduzindo 2px quando não cabe */
 .topbar .brand { line-height: 1.04; }
+.topbar .brand { font-size: 23px; }
 .topbar .brand br { display: block; content: ''; }
 .brand--2l { font-size: 26px !important; line-height: .95 !important; }
 .brand--3l { font-size: 24px !important; line-height: .95 !important; }
@@ -1115,8 +1116,8 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
 .modal--list.kb .bairro-lista { max-height: 220px; }
 
 /* logo com dois nomes empilhados: menor */
-.topbar .brand.brand--2l { font-size: 24px !important; line-height: .95 !important; }
-.topbar .brand.brand--3l { font-size: 22px !important; line-height: .95 !important; }
+.topbar .brand.brand--2l { font-size: 19px !important; line-height: .95 !important; }
+.topbar .brand.brand--3l { font-size: 17px !important; line-height: .95 !important; }
 
 /* botão Pedir agora vira contador quando o item já está na sacola */
 .hero-stepper { margin: 0 auto; }
@@ -1143,6 +1144,247 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
 .chk-card { background: var(--white); border-radius: 22px; padding: 14px 14px 10px; margin: 14px 0; box-shadow: var(--shadow-sm); }
 .chk-card .sub-h { margin-top: 4px; }
 
+/* checklist: título centralizado no topo do card; cada opção é um card que muda de cor ao marcar */
+.chk-card { padding: 10px 12px 12px; margin: 14px 0 10.5px; }
+.chk-card .sub-h { margin: 0 0 8px; text-align: center; font-size: 22px; }
+.chk-card .mrow--check { background: var(--canvas, #f5f3ee); border-radius: 16px; padding: 12px; border: 1.5px solid transparent; transition: background-color .2s, border-color .2s; }
+.chk-card .mrow--check.is-on { background: var(--accent); color: var(--accent-ink); }
+.chk-card .mrow--check.is-on h3, .chk-card .mrow--check.is-on small, .chk-card .mrow--check.is-on .price { color: inherit; }
+.chk-card .mrow--check.is-on .check-btn { background: var(--accent-ink); color: var(--accent); border-color: var(--accent-ink); }
+
+/* título do checklist mais alto, com respiro até as opções */
+.chk-card { padding: 6px 12px 12px; }
+.chk-card .sub-h { margin: 0 0 16px; line-height: 1.1; }
+
+/* título do checklist: mais espaço até as opções */
+#gradeList .chk-card .sub-h { margin: 0 0 18px !important; }
+/* carrinho: itens do mesmo prato num card só */
+.cgroup { list-style: none; background: var(--white); border-radius: 24px; padding: 12px; box-shadow: var(--shadow-sm); margin-bottom: 8px; }
+.cgroup__h { margin: 0 0 8px; font-size: 16px; }
+.cgroup__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.cgroup .citem { box-shadow: none; background: var(--canvas, #f5f3ee); }
+
+/* ----- resumo do prato (página do prato, acima do rodapé) ----- */
+#pratoResumo { padding: 0 14px 10px; }
+#pratoResumo[hidden] { display: none; }
+.pr-card { background: var(--white); border-radius: 22px; box-shadow: var(--shadow-sm); overflow: hidden; }
+.pr-head { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: none; border: 0; color: var(--ink); font-weight: 700; font-size: 14px; }
+.pr-chev { transition: transform .2s; display: inline-block; }
+.pr-chev.is-min { transform: rotate(-90deg); }
+.pr-yellow { margin: 0 10px 10px; background: var(--accent); color: var(--accent-ink); border-radius: 18px; padding: 12px 14px; }
+.pr-title { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.pr-title b { font-size: 16px; }
+.pr-ctl { display: flex; align-items: center; gap: 6px; background: var(--accent-ink); color: var(--accent); border-radius: 999px; padding: 3px; flex: none; }
+.pr-ctl button { width: 30px; height: 30px; border-radius: 50%; background: transparent; color: inherit; border: 0; font-size: 18px; line-height: 1; }
+.pr-ctl span { min-width: 20px; text-align: center; font-weight: 700; }
+.pr-list { list-style: none; margin: 8px 0 0; padding: 0; font-size: 14px; }
+.pr-list li { padding: 2px 0; }
+.pr-total { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(0,0,0,.15); }
+.pr-total strong { font-size: 18px; }
+
+/* ----- checkout: prato principal + itens menores em 2 colunas ----- */
+.cgroup__list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cgroup__list > .citem--main { grid-column: 1 / -1; }
+.cgroup .citem--sub { padding: 4px 6px 4px 4px; gap: 5px; border-radius: 16px; min-width: 0; }
+.cgroup .citem--sub .tile { width: 32px; height: 32px; font-size: 15px; border-radius: 10px; flex: none; }
+.cgroup .citem--sub .citem__info { min-width: 0; flex: 1; }
+.cgroup .citem--sub h4 { font-size: 12px; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cgroup .citem--sub small { font-size: 10px; }
+.cgroup .citem--sub .stepper { zoom: .7; }
+.cgroup .citem--sub .citem__sum { font-size: 11px; }
+
+/* resumo do prato: minimizado mostra título em negrito + itens por grupo; lista com imagem e título */
+.pr-hd-txt { display: flex; flex-direction: column; gap: 3px; text-align: left; min-width: 0; font-size: 14px; }
+.pr-hd-txt b { font-size: 15px; }
+.pr-min-l { font-weight: 400; font-size: 13px; color: var(--muted, #777); }
+.pr-list .pr-item { display: flex; align-items: center; gap: 10px; padding: 4px 0; list-style: none; }
+.pr-item .tile { width: 40px; height: 40px; border-radius: 12px; overflow: hidden; flex: none; font-size: 18px; }
+.pr-item .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pr-item__t { display: flex; flex-direction: column; min-width: 0; }
+.pr-item__t small { font-size: 12px; opacity: .8; }
+/* checkout: item menor com nome visível (grade de 3 colunas: imagem | nome | controle e soma) */
+.cgroup .citem--sub { display: grid; grid-template-columns: 32px 1fr auto; grid-template-areas: "tile info info" "tile ctl sum"; align-items: center; column-gap: 6px; row-gap: 2px; }
+.cgroup .citem--sub .tile { grid-area: tile; }
+.cgroup .citem--sub .citem__info { grid-area: info; min-width: 0; }
+.cgroup .citem--sub .stepper { grid-area: ctl; justify-self: start; }
+.cgroup .citem--sub .citem__sum { grid-area: sum; }
+.cgroup .citem--sub h4 { white-space: normal; }
+
+/* resumo do prato: linhas "Grupo: itens" (menos altura, sem fotos) */
+.pr-lines { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.pr-lines .pr-min-l { display: block; font-size: 14px; color: inherit; }
+/* checkout: sub-itens sem foto, contador no canto inferior direito, 15% maior */
+.cgroup .citem--sub { grid-template-columns: 1fr auto; grid-template-areas: "info info" "sum ctl"; }
+.cgroup .citem--sub .stepper { zoom: .805; }
+.cgroup .citem--sub .citem__sum { justify-self: start; }
+
+/* itens do prato no checkout: cards 25% mais baixos */
+.cgroup .citem--sub { padding: 0 6px; row-gap: 0; }
+.cgroup .citem--sub h4 { line-height: 1.1; }
+
+/* sub-itens: nome e contador centralizados no card */
+.cgroup .citem--sub { padding: 3px 6px 4px; align-content: center; }
+/* botões brancos sobre fundo claro: sombra para destacar */
+.add, .btn-escolher { box-shadow: 0 4px 14px rgba(0, 0, 0, .22); }
+
+/* "2 colunas" (fotos): cards 25% mais baixos e contador centralizado */
+.fotos-list .fcell__img { aspect-ratio: auto; height: 150px; }
+.fotos-list .fcell__info .gctl { width: 100%; margin-left: 0; display: flex; justify-content: center; }
+.fotos-list .fcell__info .gctl .stepper { width: 100%; justify-content: center; gap: 16px; }
+
+/* header: botão do app só com o ícone; menu com 3 linhas; card minimizado com sombra igual aos outros */
+.app-btn { width: 48px; height: 48px; padding: 0; justify-content: center; }
+.app-btn span { display: none; }
+.minacc { box-shadow: var(--shadow-card); }
+
+/* seu pedido com sombra; grade de fotos do prato na mesma largura dos outros cards */
+.pr-card { box-shadow: var(--shadow-card); }
+#gradeList .prato-grade { padding: 0 0 8px; }
+
+/* hero 30% mais baixa, título mais grosso; aviso de loja fechada 20% mais baixo */
+.hero h1 { font-weight: 800; }
+.closed-banner { padding: 10px 16px !important; font-size: 15px !important; }
+
+/* cabeçalho 15% mais baixo; botões do cabeçalho 15% menores; hero volta ao tamanho original para o título não cobrir os cards */
+:root { --topbar-h: 49px; }
+.topbar .icon-btn { width: 37px; height: 37px; }
+.app-btn { width: 41px !important; height: 41px !important; }
+.topbar .icon-btn svg { transform: scale(.85); }
+
+/* títulos da hero dentro de um card com foto; fonte mais grossa; 3px menor */
+.hero h1 { font-size: calc(clamp(27px, 7.4vw, 54px) - 3px) !important; font-weight: 900 !important; }
+.hcard { position: relative; overflow: hidden; border-radius: 24px; background: #1b1b1b; margin: 0 auto; max-width: 760px; }
+.htrack { display: flex; transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+.hslide { flex: 0 0 100%; min-height: 150px; display: grid; place-items: center; padding: 30px 22px 34px; background: #1b1b1b center / cover no-repeat; position: relative; }
+.hslide::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .6)); }
+.hslide span { position: relative; display: block; color: #fff; }
+.hslide .hl, .hslide mark { color: #f2d46b; }
+.hdots { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; justify-content: center; gap: 6px; }
+.hdots i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, .45); }
+.hdots i.on { background: #fff; }
+
+/* primeira dobra mais curta: abas aparecem; cards da hero 15% menores */
+.hero__cards { zoom: .85; height: auto; margin-bottom: 0 !important; }
+.hero { padding-top: 8px !important; }
+.hero__cta { margin-top: 12px !important; }
+.hero__sub { margin-top: 8px !important; }
+.hslide { min-height: 0 !important; padding: 18px 16px 24px !important; }
+.hdots { bottom: 6px; }
+
+/* hero: subtítulo dentro do card; texto à esquerda/direita com foto no canto oposto; Yuyu Short; espaço para o carrossel */
+.hero__cards { margin-bottom: 18px !important; }
+.hslide__in { position: relative; width: 100%; }
+.hslide small { display: block; margin-top: 6px; font-size: 14px; font-weight: 500; opacity: .92; line-height: 1.3; }
+.hslide b { font-weight: 900; }
+.yuyu { font-family: 'Yuyu Short', 'Caveat', cursive; font-weight: 700; font-size: 1.12em; line-height: 1; }
+.hcard--l .hslide__in, .hcard--r .hslide__in { padding-right: 0; }
+.hcard--l .hslide, .hcard--l .hslide__in { text-align: left; }
+.hcard--r .hslide, .hcard--r .hslide__in { text-align: right; }
+.hcard--l .hslide { padding-right: 44%; }
+.hcard--r .hslide { padding-left: 44%; }
+.hside { position: absolute; top: 10px; bottom: 10px; right: 10px; width: 38%; border-radius: 18px; background: #fff center / contain no-repeat; z-index: 3; }
+.hcard--r .hside { right: auto; left: 10px; }
+.hdots { z-index: 4; }
+
+/* texto não centralizado: foto do título no canto oposto e texto sem passar por baixo dela */
+.hcard--l .hslide__in { max-width: 56%; }
+.hcard--r .hslide__in { max-width: 56%; margin-left: auto; }
+.hcard--l .hslide, .hcard--r .hslide { padding-left: 22px; padding-right: 22px; }
+.hslide .hside { position: absolute; top: 10px; bottom: 10px; right: 10px; width: 38%; border-radius: 18px; background: #fff center / contain no-repeat; z-index: 3; }
+.hcard--r .hslide .hside { right: auto; left: 10px; }
+
+/* texto alinhado à esquerda/direita fica no lado certo, 1px menor; cartas podem ser desligadas; pesquisa e abas sobem */
+.hero h1 { font-size: calc(clamp(27px, 7.4vw, 54px) - 4px) !important; }
+.hcard--l .hslide { place-items: center start; }
+.hcard--r .hslide { place-items: center end; }
+#cardapio { margin-top: -36px !important; }
+
+/* foto do título 1:1 e card mais baixo; título sem card */
+.hslide .hside { width: 30%; aspect-ratio: 1 / 1; top: 50%; bottom: auto; transform: translateY(-50%); }
+.hslide { padding-top: 14px !important; padding-bottom: 14px !important; }
+.hcard { background: #3a3128; }
+.htxt { display: block; }
+
+/* pesquisa 20% mais baixa, logo abaixo do cabeçalho e sem fixar ao rolar; ícone à esquerda da logo */
+/* busca fica fora da faixa fixa; só as abas grudam logo abaixo do cabeçalho */
+#searchForm.search { margin: 16px 0 14px; }
+.stick-nav { margin-top: 0 !important; }
+/* abas: quadradas 1:1, mesmo tamanho, ícone em cima e nome pequeno embaixo; ~4,5 visíveis */
+.pills { gap: 8px; padding-top: 6px; padding-bottom: 10px; }
+.pill { flex: 0 0 calc((100% - 32px) / 4.5); aspect-ratio: 1 / 1; flex-direction: column; justify-content: center; gap: 5px; padding: 6px 4px; border-radius: 16px; min-width: 0; }
+.pill i { width: 34px; height: 34px; flex: none; }
+.pill i svg { width: 18px !important; height: 18px !important; }
+.pill { font-size: 11.5px; line-height: 1.1; font-weight: 600; text-align: center; max-width: 100%; }
+.pill { overflow: hidden; white-space: normal; overflow-wrap: anywhere; }
+.search { height: 46px; padding: 3px 3px 3px 18px; box-sizing: border-box; }
+.search__in { height: 38px !important; font-size: 15px !important; }
+.search__go { width: 40px !important; height: 40px !important; }
+.top-ico { flex: none; }
+
+/* cards desativados: some também a linha dos 2 botões */
+.hero__cta[hidden] { display: none !important; }
+
+/* carrossel 20% mais baixo (altura própria do card); sem setinha ao lado dos títulos de seção */
+.hcard { height: 158px; }
+.hcard .htrack { height: 100%; }
+.hcard .hslide { height: 100%; }
+.hslide .hside { height: auto; width: 30%; aspect-ratio: 1 / 1; top: 50%; bottom: auto; transform: translateY(-50%); }
+.hslide__in > span { font-size: .8em; line-height: 1.12; }
+.hcard .htrack, .hcard .hslide { height: 100%; min-height: 0 !important; }
+.cat__title > svg:last-child { display: none !important; }
+
+/* sombra por baixo do card branco "Seu pedido" */
+.pr-card { box-shadow: 0 8px 18px -6px rgba(0, 0, 0, .25), 0 2px 6px rgba(0, 0, 0, .12) !important; margin: 4px 4px 14px; }
+
+/* negrito com * : peso máximo da fonte da loja */
+.hslide b, .hslide mark { font-weight: 900; }
+
+/* barra do prato: botão único "Prosseguir" (vai ao checkout) com ícone */
+.grade-bar .grade-bar__go { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; background: #000 !important; color: #fff !important; font-weight: 700; font-size: 16px; }
+.grade-bar .grade-bar__go svg { flex: none; }
+/* checkout: voltar ao cardápio à esquerda do botão de enviar */
+.sheet__foot { display: flex; gap: 10px; align-items: center; }
+.sheet__foot .btn--wa { flex: 1; }
+
+/* carrossel da hero: altura fixa em px (evita corte embaixo com zoom) */
+.hero__cards { height: auto !important; padding-bottom: 4px; }
+.hcard { height: 158px !important; border-radius: 24px; }
+.hcard .htrack, .hcard .hslide { height: 158px !important; }
+
+/* carrossel: altura pelo conteúdo (mín. 158px), sem corte embaixo */
+.hcard { height: auto !important; min-height: 158px; }
+.hcard .htrack, .hcard .hslide { height: auto !important; }
+.hcard .hslide { min-height: 158px !important; }
+
+/* carrossel sem zoom (zoom cortava a borda de baixo no celular); escala feita em px */
+.hero__cards { zoom: 1 !important; }
+.hcard { height: 134px !important; min-height: 0 !important; }
+.hcard .htrack, .hcard .hslide { height: 134px !important; min-height: 0 !important; }
+.hcard .hslide { padding: 14px 14px 18px !important; }
+.hslide__in > span { font-size: .68em !important; line-height: 1.12; }
+.hslide small { font-size: 12px !important; }
+.hslide .hside { background-size: cover !important; width: 30% !important; }
+
+/* abas um pouco mais para cima (sem mexer no posicionamento "sticky") */
+.hero__cards { margin-bottom: 0 !important; }
+.stick-nav { margin-top: 6px !important; }
+
+/* títulos de seção mais perto do conteúdo anterior; carrossel com altura pelo texto (sem corte) */
+.cat { padding-top: 18px !important; }
+.cat__title { margin-bottom: 4px; }
+.hcard { height: auto !important; min-height: 134px !important; }
+.hcard .htrack, .hcard .hslide { height: auto !important; min-height: 134px !important; }
+
+/* busca e carrossel 3px mais para cima */
+#searchForm.search { margin-top: 13px !important; }
+
+/* abas e tudo abaixo descem um pouco */
+.stick-nav { margin-top: 10px !important; }
+
+/* abas e tudo abaixo descem mais 15px */
+.stick-nav { margin-top: 25px !important; }
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap">
 </style>
 </head>
 
@@ -1163,7 +1405,7 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
   <!-- ========== TOPO ========== -->
   <header class="topbar" id="topbar">
     <div class="container topbar__in">
-      <a class="brand" href="#top" aria-label="Voltar ao topo">Cardápio</a>
+      <span class="brand-wrap" style="display:flex;align-items:center;gap:8px"><svg class="top-ico" width="30" height="26" viewBox="0 0 30 28" aria-hidden="true"><path d="M3 11C3 5.5 8.5 2 15 2s12 3.5 12 9H3Z" fill="#e8b56a"/><circle cx="10" cy="6.4" r="1" fill="#fff3d6"/><circle cx="15" cy="4.6" r="1" fill="#fff3d6"/><circle cx="20" cy="6.4" r="1" fill="#fff3d6"/><path d="M2.5 13.6c1.8 1.6 3.4 1.6 5 0s3.2 1.6 5 0 3.2 1.6 5 0 3.2 1.6 5 0 3.2 1.6 5 0" fill="none" stroke="#7fa35a" stroke-width="2.4" stroke-linecap="round"/><rect x="2" y="16.4" width="26" height="4.2" rx="2.1" fill="#5b3a29"/><path d="M3 22.4h24c0 2.9-2.2 4.6-5.2 4.6H8.2C5.2 27 3 25.3 3 22.4Z" fill="#e2a955"/></svg><a class="brand" href="#top" aria-label="Voltar ao topo">Cardápio</a></span>
       <p class="status" id="statusPill"><i class="status__dot"></i><span id="statusTxt">Carregando…</span></p>
       <div class="top-acoes">
       <button class="track-top ripple" id="btnTrack" type="button" data-open-track hidden aria-label="Acompanhar pedido">
@@ -1172,16 +1414,9 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
       </button>
       <button class="app-btn ripple" id="btnApp" type="button" aria-label="Baixar o app">
         <svg class="sv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g class="sv-bounce"><path d="M12 4v10"/><path d="M8 10.5l4 4 4-4"/></g><path d="M5 19.5h14"/></svg>
-        <span>App</span>
       </button>
       <button class="icon-btn ripple" id="menuBtn" type="button" data-open-menu aria-label="Abrir menu" aria-expanded="false" aria-controls="drawer">
-        <svg width="30" height="28" viewBox="0 0 30 28" aria-hidden="true">
-          <path d="M3 11C3 5.5 8.5 2 15 2s12 3.5 12 9H3Z" fill="#e8b56a"/>
-          <circle cx="10" cy="6.4" r="1" fill="#fff3d6"/><circle cx="15" cy="4.6" r="1" fill="#fff3d6"/><circle cx="20" cy="6.4" r="1" fill="#fff3d6"/>
-          <path d="M2.5 13.6c1.8 1.6 3.4 1.6 5 0s3.2 1.6 5 0 3.2 1.6 5 0 3.2 1.6 5 0 3.2 1.6 5 0" fill="none" stroke="#7fa35a" stroke-width="2.4" stroke-linecap="round"/>
-          <rect x="2" y="16.4" width="26" height="4.2" rx="2.1" fill="#5b3a29"/>
-          <path d="M3 22.4h24c0 2.9-2.2 4.6-5.2 4.6H8.2C5.2 27 3 25.3 3 22.4Z" fill="#e2a955"/>
-        </svg>
+        <svg width="26" height="20" viewBox="0 0 26 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M2 3h22M2 10h22M2 17h22"/></svg>
       </button>
       </div>
     </div>
@@ -1194,8 +1429,14 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
 
     <!-- ========== HERO ========== -->
     <section class="hero container">
+      <form class="search" id="searchForm" role="search">
+      <input class="search__in" id="searchIn" type="search" placeholder="O que você quer comer hoje?" autocomplete="off" aria-label="Buscar no cardápio">
+      <button class="search__go ripple" type="submit" aria-label="Buscar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      </form>
       <div class="hero__cards" id="heroCards" aria-hidden="true"></div>
-      <h1 data-in style="--d:.05s"><span id="heroTitle"></span></h1>
+      <h1 data-in style="--d:.05s"><div id="heroTitle"></div></h1>
       <p class="hero__sub" id="heroSub" data-in style="--d:.15s"></p>
       <div class="hero__cta" data-in style="--d:.25s">
         <a class="btn btn--light ripple" href="#cardapio" id="heroVer">Ver cardápio</a>
@@ -1225,12 +1466,6 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
     <!-- ========== CARDÁPIO ========== -->
     <section class="container" id="cardapio">
       <div class="stick-nav" id="stickNav">
-        <form class="search" id="searchForm" role="search">
-          <input class="search__in" id="searchIn" type="search" placeholder="O que você quer comer hoje?" autocomplete="off" aria-label="Buscar no cardápio">
-          <button class="search__go ripple" type="submit" aria-label="Buscar">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-        </form>
         <nav class="pills" id="pills" aria-label="Categorias do cardápio"></nav>
       </div>
       <div id="menu"><p class="empty">Carregando cardápio…</p></div>
@@ -1358,9 +1593,10 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
     </div>
 
     <footer class="sheet__foot" id="sheetFoot" hidden>
+      <button class="btn light" type="button" data-close-cart>Voltar ao cardápio</button>
       <button class="btn btn--wa btn--block ripple" type="button" id="btnFinish" disabled>
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.47 15l-1.5 5.5 5.63-1.47A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.34.87.9-3.25-.2-.33a8.2 8.2 0 1 1 7.14 4.04Zm4.5-6.1c-.25-.12-1.46-.72-1.68-.8-.23-.08-.4-.12-.56.12-.17.25-.64.8-.78.96-.14.17-.29.19-.53.06a6.7 6.7 0 0 1-3.3-2.88c-.25-.43.25-.4.72-1.33.08-.16.04-.3-.02-.42-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.47a.9.9 0 0 0-.65.3c-.23.25-.86.84-.86 2.05s.88 2.38 1 2.55c.12.16 1.73 2.64 4.19 3.7 1.56.67 2.17.73 2.95.62.48-.07 1.46-.6 1.67-1.17.2-.58.2-1.07.14-1.17-.06-.1-.23-.16-.47-.28Z"/></svg>
-        <span id="btnFinishTxt">Preencha os dados para prosseguir</span>
+        <span id="btnFinishTxt">Finalizar</span>
       </button>
     </footer>
   </section>
@@ -1406,7 +1642,7 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
     <div class="page__body"><div class="grade" id="gradeList"></div></div>
     <footer class="grade-bar">
       <button class="btn light" type="button" data-close-grade>Voltar</button>
-      <button class="btn grade-bar__sacola" type="button" data-grade-cart>Ver sacola · <span id="gradeBarTxt"></span></button>
+      <button class="btn grade-bar__go" type="button" data-grade-cart>Prosseguir<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
     </footer>
   </section>
 
@@ -1530,9 +1766,13 @@ const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 const brl = n => Number(n || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const hl = s => esc(s).replace(/\/([^\/]+)\//g, '<span class="free">$1</span>');   // /texto/ fica destacado
+const hl = s => esc(s).replace(/\/([^\/]+)\//g, '<span class="free">$1</span>').replace(/\*([^*]+)\*/g, '<b>$1</b>').replace(/@([^@]+)@/g, '<span class="yuyu">$1</span>').replace(/\r?\n+/g, '<br>');   // quebra de linha: uma por Enter, sem quebra dupla; /texto/ amarelo, *texto* negrito, @texto@ fonte Yuyu Short
 const brandHTML = n => esc(n || 'Cardápio').split('.').join('<span>.</span>');
-const nomeEmLinhas = n => esc(n || 'Cardápio').split(' ').map(w => w.split('.').join('<span>.</span>')).join('<br>');
+const nomeEmLinhas = n => {   // 3+ palavras: "Marmita da" / "Silvana"; 1-2 palavras: uma por linha
+  const ws = String(n || 'Cardápio').trim().split(/\s+/);
+  const linhas = ws.length >= 3 ? [ws.slice(0, -1).join(' '), ws[ws.length - 1]] : ws;
+  return linhas.map(l => esc(l).split('.').join('<span>.</span>')).join('<br>');
+};
 function fitBrand() {
   const el = document.querySelector('.topbar .brand');
   if (!el) return;
@@ -1578,6 +1818,14 @@ function montaDados(cats, prods) {
   CATS = cats.filter(c => !String(c.nome).startsWith('__'))
     .sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0) || a.id - b.id)
     .map(c => ({ id: c.id, nome: c.nome, cfg: cfgPor[c.id] || { ...DEF_CFG } }));
+  // C.Dia: o cardápio ativo no painel decide quais categorias aparecem no site (subcategorias seguem o pai)
+  const cdAtivo = (CFG.cdia && Array.isArray(CFG.cdia.cards)) ? (CFG.cdia.cards.find(c => c.id === CFG.cdia.ativo) || CFG.cdia.cards[0]) : null;
+  if (cdAtivo && Array.isArray(cdAtivo.cats)) {
+    const ok = new Set(cdAtivo.cats.map(Number));
+    CATS = CATS.filter(c => c.cfg.tipo === 'item'
+      ? (c.cfg.parents || []).some(pid => ok.has(Number(pid)))   // subcategoria some junto com o pai
+      : ok.has(Number(c.id)));
+  }
   const catById = Object.fromEntries(CATS.map(c => [c.id, c]));
   PRODS = prods.filter(p => p.nome !== '__config' && !p.pausado && catById[p.categoria_id]).map(p => ({
     id: Number(p.id), cat: catById[p.categoria_id], nome: p.nome, desc: p.descricao || '',
@@ -1591,6 +1839,49 @@ PRODS.forEach(aplicaOferta);
   });
   PRODS.sort((a, b) => a.ord - b.ord || a.id - b.id);
   BYID = Object.fromEntries(PRODS.map(p => [p.id, p]));
+  cupomReaplica();
+  CDIA_SNAP = JSON.stringify(CFG.cdia || null);
+}
+
+/* C.Dia trocado no painel: o site atualiza sozinho (confere a cada 30s e ao voltar para a aba) */
+let CDIA_SNAP = null;
+async function cdiaChecaMudanca() {
+  try {
+    const r = await get(`site_config?select=value&key=eq.cdia&loja_id=eq.${LOJA.id}`);
+    const atual = JSON.stringify(r && r[0] ? r[0].value : null);
+    if (CDIA_SNAP !== null && atual !== CDIA_SNAP) location.reload();
+  } catch (e) { /* sem rede: tenta de novo depois */ }
+}
+setInterval(cdiaChecaMudanca, 30000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) cdiaChecaMudanca(); });
+
+/* ===== CUPOM: a busca aplica os preços de um cupom (palavra cadastrada no painel) ===== */
+let CUPOM_ATIVO = null;
+function cupomAplicaPrecos() {
+  PRODS.forEach(p => {
+    if (p.precoBase === undefined) p.precoBase = p.preco;
+    const v = CUPOM_ATIVO && CUPOM_ATIVO.precos ? CUPOM_ATIVO.precos[p.id] : null;
+    p.preco = v != null && v !== '' ? Number(v) : p.precoBase;
+  });
+}
+function cupomReaplica() {
+  const lista = Array.isArray(CFG.cupons) ? CFG.cupons : [];
+  if (!CUPOM_ATIVO) {
+    let k = null; try { k = sessionStorage.getItem('cupomAtivo'); } catch (e) {}
+    if (k) CUPOM_ATIVO = lista.find(x => x && x.codigo && norm(x.codigo) === norm(k)) || null;
+  }
+  cupomAplicaPrecos();
+}
+function cupomAplica(texto) {
+  const lista = Array.isArray(CFG.cupons) ? CFG.cupons : [];
+  const c = lista.find(x => x && x.codigo && norm(x.codigo) === norm(String(texto).trim()));
+  if (!c) return false;
+  CUPOM_ATIVO = c;
+  try { sessionStorage.setItem('cupomAtivo', c.codigo); } catch (e) {}
+  cupomAplicaPrecos();
+  renderMenu(); renderCart(); renderPratoResumo();
+  toast('Cupom ' + c.codigo + ' aplicado!');
+  return true;
 }
 
 function demo() {
@@ -1766,15 +2057,17 @@ function montaSecoes() {
     // so_em: item adicionado por um card específico aparece só nele
     if (pais.length) pais.forEach(id => {
       const lista = itens.filter(p => p.so_em == null || p.so_em === id);
-      if (lista.length) porCat[id].subs.push({ nome: s.nome, itens: lista, exibicao: exib, grupo: (s.cfg.secao || '').trim(), icone: s.cfg.icone || '' });
+      if (lista.length) porCat[id].subs.push({ nome: s.nome, itens: lista, exibicao: exib, grupo: (s.cfg.secao || '').trim(), icone: s.cfg.icone || '', max: s.cfg.max_escolha });
     });
-    else secs.push({ nome: s.nome, itens, subs: [], estilo: ['grade', 'fotos'].includes(exib) ? exib : undefined, icone: s.cfg.icone || '' });
+    else secs.push({ nome: s.nome, itens, subs: [], estilo: ['grade', 'fotos'].includes(exib) ? exib : undefined, icone: s.cfg.icone || '', max: s.cfg.max_escolha });
   });
   return secs;
 }
 
+const ehPrincipal = p => p.cat.cfg.exibicao === 'prato' && (!p.cat.cfg.principal_id || Number(p.cat.cfg.principal_id) === p.id);
+const nomeItem = p => ehPrincipal(p) ? p.cat.nome : p.nome;
 function cardHTML(p, i, noReveal) {
-  const desc = p.desc || p.cat.cfg.substituto || '';
+  const desc = ehPrincipal(p) ? (p.cat.cfg.substituto || '') : (p.desc || (p.cat.cfg.exibicao === 'prato' ? '' : p.cat.cfg.substituto) || '');
   const badges = [
     p.selo && `<span class="badge">${esc(p.selo)}</span>`,
     p.brinde && `<span class="badge">${ico('gift')} Ganhe 1 bebida grátis</span>`,
@@ -1784,7 +2077,7 @@ function cardHTML(p, i, noReveal) {
     <article class="pcard${noReveal ? '' : ' reveal'}" style="--d:${(i % 4) * 60}ms" data-id="${p.id}" data-search="${esc(norm(p.nome + ' ' + desc))}">
       <div class="pcard__info">
         ${badges}
-        <h3>${esc(p.nome)}</h3>
+        <h3>${esc(nomeItem(p))}</h3>
         <p class="pcard__desc">${esc(desc)}</p>
         <div class="price" data-pid="${p.id}"><strong>${brl(p.preco)}</strong>${p.antes ? `<s>${brl(p.antes)}</s>` : ''}</div>
       </div>
@@ -1811,12 +2104,12 @@ function minHTML(p) {
     </div>`;
 }
 function checkHTML(p) {
-  const desc = p.desc || p.cat.cfg.substituto || '';
+  const desc = ehPrincipal(p) ? (p.cat.cfg.substituto || '') : (p.desc || (p.cat.cfg.exibicao === 'prato' ? '' : p.cat.cfg.substituto) || '');
   const on = !!cart[p.id];
   return `
-    <div class="mrow mrow--check" data-id="${p.id}" data-search="${esc(norm(p.nome + ' ' + desc))}">
+    <div class="mrow mrow--check${on ? ' is-on' : ''}" data-id="${p.id}" data-search="${esc(norm(p.nome + ' ' + desc))}">
       <div class="info">
-        <h3>${esc(p.nome)}</h3>
+        <h3>${esc(nomeItem(p))}</h3>
         ${desc ? `<small>${esc(desc)}</small>` : ''}
         <div class="price" data-pid="${p.id}"><strong>${brl(p.preco)}</strong>${p.antes ? `<s>${brl(p.antes)}</s>` : ''}</div>
       </div>
@@ -1963,22 +2256,72 @@ function renderMenu() {
     `<button class="dlink dlink--bag ripple" type="button" data-open-cart data-close-menu><i>${ico('bag')}</i>Minha sacola<b id="drawerCount" hidden>0</b></button>`;
 }
 
+/* carrossel dos títulos da hero: troca a cada 3s e pode ser arrastado para o lado */
+let heroTimer = null;
+function iniciaHeroCarrossel() {
+  clearInterval(heroTimer);
+  const track = document.querySelector('#heroTitle .htrack'); if (!track) return;
+  const real = track.children.length - 1; if (real < 1) return;
+  let i = 0, x0 = null;
+  const dotOn = () => document.querySelectorAll('#heroTitle .hdots i').forEach((d, j) => d.classList.toggle('on', j === i % real));
+  const jump = k => { track.style.transition = 'none'; track.style.transform = `translateX(${-k * 100}%)`; track.offsetHeight; track.style.transition = ''; };
+  const go = k => {
+    if (k < 0) { jump(real); i = real; k = real - 1; }   // voltou do primeiro: entra pelo último (clone)
+    i = k;
+    track.style.transform = `translateX(${-i * 100}%)`;
+    dotOn();
+  };
+  track.addEventListener('transitionend', () => { if (i === real) { jump(0); i = 0; dotOn(); } });  // clone do primeiro: volta ao início sem pular
+  const auto = () => { clearInterval(heroTimer); heroTimer = setInterval(() => go(i + 1), 3000); };
+  auto();
+  const card = track.parentElement;
+  card.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; clearInterval(heroTimer); }, { passive: true });
+  card.addEventListener('touchend', e => {
+    if (x0 == null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 30) go(i + (dx < 0 ? 1 : -1));
+    auto();
+  });
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden && CFG && CFG.titulos) { try { renderHero(); } catch (e) {} } });
+window.addEventListener('pageshow', e => { if (e.persisted) { try { renderHero(); } catch (err) {} } });
+// hero do cardápio ativo do C.Dia (se ele tiver hero própria); senão, a hero geral
+function heroAtivo() {
+  const cd = CFG.cdia, a = cd && Array.isArray(cd.cards) ? (cd.cards.find(c => c.id === cd.ativo) || cd.cards[0]) : null;
+  return (a && a.hero) ? a.hero : ((CFG.titulos || {}).hero || {});
+}
 function renderHero() {
-  const T = (CFG.titulos || {}).hero || {};
+  const T = heroAtivo();
   const todos = PRODS.filter(p => !isBump(p.cat));
   let dest = (Array.isArray(T.cards) ? T.cards : []).map(Number)
     .map(id => todos.find(p => p.id === id)).filter(Boolean).slice(0, 3);
   dest = dest.concat(todos.filter(p => !dest.includes(p)).slice(0, 3 - dest.length));
   const pos = [[-108, 26, -8, 0], [0, 0, 0, .8], [108, 30, 7, 1.6]];
-  $('#heroCards').hidden = !dest.length;
+  const alH = (T.a === 'c' || T.a === 'r') ? T.a : 'l';   // '' = esquerda
+  $('#heroCards').hidden = !dest.length || T.cardsOn === false;   // cartas podem ser desativadas no painel
+  const heroCta = document.querySelector('.hero__cta'); if (heroCta) heroCta.hidden = T.cardsOn === false;   // com os cards desativados, somem os 2 botões também
   $('#heroCards').innerHTML = dest.map((p, i) => {
     const [x, y, r, fd] = pos[i];
     return `<div class="fcard${i === 1 ? ' fcard--main' : ''}" style="--x:${x}px;--y:${y}px;--r:${r}deg;--fd:${fd}s">
       <div class="tile" style="--tile:${PAL[p.id % PAL.length]}">${mediaHTML(p)}</div>
       <b>${esc(p.nome)}</b><small>${brl(p.preco)}</small></div>`;
   }).join('');
-  $('#heroTitle').innerHTML = hl(T.t || 'Bem-vindo ao nosso cardápio');
-  $('#heroSub').innerHTML = `<strong>${esc(T.nome || LOJA.nome)}</strong>${esc(T.sub || 'Escolha seus itens e peça pelo WhatsApp.')}`;
+  // títulos da hero: principal + extras, todos no mesmo card com foto; carrossel a cada 3s
+  const TITS = [{ t: T.t || 'Bem-vindo ao nosso cardápio', foto: T.foto || '', sub: T.sub || '' }].concat(Array.isArray(T.mais) ? T.mais : []).filter(x => x && x.t);
+  // texto não centralizado: a foto do próprio título aparece no canto oposto
+  const slideHTML = x => `<div class="hslide"${x.foto ? ` style="background-image:url('${esc(x.foto)}')"` : ''}>${alH !== 'c' && x.foto ? `<div class="hside" style="background-image:url('${esc(x.foto)}')"></div>` : ''}<div class="hslide__in"><span>${hl(x.t)}</span>${x.sub ? `<small>${hl(x.sub)}</small>` : ''}</div></div>`;
+  // com 2+ títulos, o primeiro é repetido no fim para o carrossel voltar da direita para a esquerda
+  const slides = TITS.map(slideHTML).join('') + (TITS.length > 1 ? slideHTML(TITS[0]) : '');
+  if (T.cardTitulo === false) {   // sem card: só o título principal
+    $('#heroTitle').innerHTML = `<span class="htxt">${hl(T.t || 'Bem-vindo ao nosso cardápio')}</span>`;
+    clearInterval(heroTimer);
+  } else
+  $('#heroTitle').innerHTML = `<div class="hcard hcard--${alH}"><div class="htrack">${slides}</div>${TITS.length > 1 ? `<div class="hdots">${TITS.map((_, i) => `<i class="${i ? '' : 'on'}"></i>`).join('')}</div>` : ''}</div>`;
+  iniciaHeroCarrossel();
+  // campo vazio no painel = não aparece nada no site
+  const hNome = T.nome !== undefined ? T.nome : LOJA.nome;   // o subtítulo agora fica dentro do card
+  $('#heroSub').innerHTML = hNome ? `<strong>${esc(hNome)}</strong>` : '';
+  $('#heroSub').hidden = !hNome;
   const main = dest[1] || dest[0];
   const secDeCat = cid => { const i = SECS.findIndex(x => x.id === cid || (x.itens || []).some(y => y.id === cid)); return i >= 0 ? 'sec-' + i : null; };
   const ver = $('#heroVer'), btn = $('#heroBtn');
@@ -2170,18 +2513,21 @@ function atualizaLoja() {
 }
 
 /* ===== 8. SACOLA E CÁLCULO (espelha criar_pedido no banco) ===== */
-const count = () => Object.values(cart).reduce((a, b) => a + b, 0);
-const hasDrink = () => Object.keys(cart).some(id => BYID[id] && isBump(BYID[id].cat));
+let LOTES = [];                      // pratos já fechados na sacola: [{nome, itens:{id:qtd}}]
+const cartAll = () => { const m = { ...cart }; LOTES.forEach(l => Object.entries(l.itens).forEach(([id, q]) => { m[id] = (m[id] || 0) + q; })); return m; };
+const count = () => Object.values(cartAll()).reduce((a, b) => a + b, 0);
+const hasDrink = () => Object.keys(cartAll()).some(id => BYID[id] && isBump(BYID[id].cat));
 const DRINKS = () => PRODS.filter(p => isBump(p.cat));
 
 /* brindes: cada item marcado como brinde dá 1 item de Order Bump grátis */
 function calc() {
   let sobra = 0;
-  Object.entries(cart).forEach(([id, q]) => { if (BYID[id] && BYID[id].brinde) sobra += q; });
+  Object.entries(cartAll()).forEach(([id, q]) => { if (BYID[id] && BYID[id].brinde) sobra += q; });
   let sub = 0, desc = 0;
   const free = {};
-  Object.keys(cart).map(Number).sort((a, b) => a - b).forEach(id => {
-    const p = BYID[id], q = cart[id];
+  const all = cartAll();
+  Object.keys(all).map(Number).sort((a, b) => a - b).forEach(id => {
+    const p = BYID[id], q = all[id];
     if (!p) return;
     let f = 0;
     if (sobra > 0 && isBump(p.cat)) { f = Math.min(q, sobra); sobra -= f; }
@@ -2196,10 +2542,12 @@ function change(id, delta) {
   if (!BYID[id]) return;
   if (delta > 0 && !count()) drinksSeen = false;   // sacola começou de novo: order bump volta a aparecer
   const q = Math.max(0, Math.min(MAX_QTD, (cart[id] || 0) + delta));
-  if (!q) delete cart[id]; else cart[id] = q;
+  if (!q) { delete cart[id]; if (BYID[id].cat.cfg.exibicao === 'prato') Object.keys(cart).forEach(k => { const g = pratoDoItem(k); if (g && g.id === BYID[id].cat.id) delete cart[k]; }); }
+  else cart[id] = q;
   lastAdded = delta > 0 ? Number(id) : null;
   if (!count()) drinksSeen = false;
   renderCart();
+  renderPratoResumo();
 }
 function addToCart(id, sourceEl) {
   const target = (sourceEl && !reduced) ? cartTarget() : null;
@@ -2232,6 +2580,95 @@ function frete(sub) {
   return { valor: t, txt: t ? brl(t) : 'Grátis' };
 }
 
+/* resumo do prato (página do prato): pedido inteiro, contador e minimizar */
+let PRATO_ID = null, PR_MIN = false, PR_ABERTO = false;
+function pratoItens() {
+  if (!PRATO_ID) return [];
+  return PRODS.filter(p => cart[p.id] && (p.cat.id === PRATO_ID || (pratoDoItem(p.id) || {}).id === PRATO_ID));
+}
+function fechaPrato() {
+  const itens = pratoItens(); if (!itens.length) return true;
+  const fm = faltaMinimo();
+  if (fm) { buzz(30); toast(`Escolha pelo menos ${fm.min} em ${fm.nome}`); return false; }
+  const o = {};
+  itens.forEach(p => { o[p.id] = cart[p.id]; delete cart[p.id]; });
+  LOTES.push({ nome: (CATS.find(c => c.id === PRATO_ID) || {}).nome || 'Prato', itens: o });
+  PR_MIN = false; lastAdded = null;
+  renderCart(); renderPratoResumo();
+  return true;
+}
+function loteChange(i, id, d) {
+  const L = LOTES[i]; if (!L) return;
+  const q = (L.itens[id] || 0) + d;
+  if (q <= 0) { delete L.itens[id]; if (BYID[id] && BYID[id].cat.cfg.exibicao === 'prato') L.itens = {}; }
+  else L.itens[id] = Math.min(MAX_QTD, q);
+  if (!Object.keys(L.itens).length) LOTES.splice(i, 1);
+  renderCart(); buzz(10);
+}
+function pratoMudaQtd(delta) {
+  const itens = pratoItens(); if (!itens.length) return;
+  const main = itens.find(p => p.cat.id === PRATO_ID);
+  const n = main ? cart[main.id] : 1;
+  if (delta < 0 && n <= 1) { itens.forEach(p => change(p.id, -cart[p.id])); return; }
+  itens.forEach(p => { const base = Math.max(1, Math.round(cart[p.id] / n)); change(p.id, delta * base); });
+}
+function renderPratoResumo() { return; }
+function _legacyPratoResumo() {
+  const box = $('#pratoResumo'); if (!box) return;
+  const aberto = $('#gradePage').classList.contains('is-open') && $('#gradeList').classList.contains('prato-page');
+  const itens = aberto ? pratoItens() : [];
+  if (!itens.length || !PR_ABERTO) { box.hidden = true; box.innerHTML = ''; return; }   // "Seu pedido" só abre pelo botão da barra
+  const main = itens.find(p => p.cat.id === PRATO_ID);
+  const n = main ? cart[main.id] : 1;
+  const nome = (CATS.find(c => c.id === PRATO_ID) || {}).nome || '';
+  const total = itens.reduce((a, p) => a + p.preco * cart[p.id], 0);
+  const extras = itens.filter(p => p.cat.id !== PRATO_ID);
+  // resumo minimizado: "Grupo: item, item" por subcategoria
+  const grupos = {};
+  extras.forEach(p => { (grupos[p.cat.nome] ||= []).push(p.nome); });
+  const resumo = Object.entries(grupos).map(([g, ns]) => `<span class="pr-min-l"><b>${esc(g)}:</b> ${ns.map(esc).join(', ')}</span>`).join('');
+  box.hidden = false;
+  box.innerHTML = `
+    <div class="pr-card">
+      <button class="pr-head" type="button" data-pr-toggle aria-expanded="${!PR_MIN}">
+        <span class="pr-hd-txt">Seu pedido</span>
+        <span class="pr-chev${PR_MIN ? ' is-min' : ''}">▾</span>
+      </button>
+      ${PR_MIN ? '' : `<div class="pr-yellow">
+        <div class="pr-title">
+          <b>${esc(nome)}</b>
+          <div class="pr-ctl">
+            <button type="button" data-pr-dec aria-label="${n <= 1 ? 'Remover prato' : 'Diminuir'}">${n <= 1 ? '✕' : '−'}</button>
+            <span>${n}</span>
+            <button type="button" data-pr-inc aria-label="Aumentar">+</button>
+          </div>
+        </div>
+        <div class="pr-lines">${resumo}</div>
+        <div class="pr-total"><small>Total do prato</small><strong>${brl(total)}</strong></div>
+      </div>`}
+    </div>`;
+}
+/* prato ao qual o item pertence (o próprio prato ou a subcategoria dele) */
+function pratoDoItem(id) {
+  const p = BYID[id]; if (!p || !p.cat) return null;
+  if (p.cat.cfg.exibicao === 'prato') return { id: p.cat.id, nome: p.cat.nome };
+  const pai = CATS.find(c => c.cfg.exibicao === 'prato' && (p.cat.cfg.parents || []).map(Number).includes(c.id));
+  return pai ? { id: pai.id, nome: pai.nome } : null;
+}
+/* checklist com mínimo obrigatório (painel): devolve a subcategoria que ainda falta escolher */
+function faltaMinimo() {
+  for (const s of CATS.filter(isSub)) {
+    const min = Number(s.cfg.min_escolha) || 0;
+    if (!min || s.cfg.exibicao !== 'checklist') continue;
+    const pais = (s.cfg.parents || []).map(Number);
+    if (!PRODS.some(p => cart[p.id] && pais.includes(p.cat.id))) continue;   // só cobra se o prato está na sacola
+    const itens = PRODS.filter(p => p.cat.id === s.id);
+    if (!itens.length) continue;
+    if (itens.filter(p => cart[p.id]).length < min) return { nome: s.nome, min };
+  }
+  return null;
+}
+
 function renderCart() {
   const n = count(), c = calc(), f = frete(c.sub);
   const tot = f.valor == null ? c.sub : c.sub + f.valor;
@@ -2241,7 +2678,6 @@ function renderCart() {
   $('#cartbar').classList.toggle('is-visible', n > 0);
   $('#barCount').textContent = n;
   syncOferta();
-  if ($('#gradeBarTxt')) $('#gradeBarTxt').textContent = n ? `${n} ${n === 1 ? 'item' : 'itens'} · ${brl(c.sub)}` : brl(0);
   $('#drawerCount').textContent = n;
   $('#drawerCount').hidden = n === 0;
   $('#barTotal').textContent = brl(c.sub);
@@ -2251,22 +2687,37 @@ function renderCart() {
   $('#sheetFoot').hidden = n === 0;
 
   $('#pedidoResumo').textContent = n ? `${n} ${n === 1 ? 'item' : 'itens'} · ${brl(c.sub)}` : '';
-  $('#cartList').innerHTML = Object.entries(cart).map(([id, q]) => {
-    const p = BYID[id], fr = c.free[id] || 0, pg = q - fr;
+  const itemCarHTML = ([id, q], dentro, li = null) => {
+    const p = BYID[id], fr = li !== null ? 0 : (c.free[id] || 0), pg = q - fr;
     const soma = fr === 0 ? brl(p.preco * q)
       : pg === 0 ? `<s>${brl(p.preco * q)}</s><span class="free-tag">Grátis</span>`
       : `${brl(p.preco * pg)}<small>${fr} grátis</small>`;
-    return `<li class="citem${Number(id) === lastAdded ? ' citem--new' : ''}">
-      <div class="tile" style="--tile:${PAL[p.id % PAL.length]}">${mediaHTML(p)}</div>
-      <div class="citem__info"><h4>${esc(p.nome)}</h4><small>${brl(p.preco)} cada</small></div>
+    const tipo = dentro ? (p.cat.cfg.exibicao === 'prato' ? ' citem--main' : ' citem--sub') : '';
+    const zeroSub = tipo === ' citem--sub' && !(p.preco > 0);
+    const sub = tipo === ' citem--sub';
+    const dA = li !== null ? `data-ldec="${li}:${id}"` : `data-dec="${id}"`, iA = li !== null ? `data-linc="${li}:${id}"` : `data-inc="${id}"`;
+    return `<li class="citem${tipo}${Number(id) === lastAdded ? ' citem--new' : ''}">
+      ${sub ? '' : `<div class="tile" style="--tile:${PAL[p.id % PAL.length]}">${mediaHTML(p)}</div>`}
+      <div class="citem__info"><h4>${esc(nomeItem(p))}</h4>${sub || zeroSub ? '' : `<small>${brl(p.preco)} cada</small>`}</div>
       <div class="stepper">
-        <button class="ripple" type="button" data-dec="${id}" aria-label="Remover um">−</button>
+        <button class="ripple" type="button" ${dA} aria-label="Remover um">−</button>
         <span>${q}</span>
-        <button class="ripple" type="button" data-inc="${id}" aria-label="Adicionar mais um">+</button>
+        <button class="ripple" type="button" ${iA} aria-label="Adicionar mais um">+</button>
       </div>
-      <strong class="citem__sum">${soma}</strong>
+      ${zeroSub ? '' : `<strong class="citem__sum">${soma}</strong>`}
     </li>`;
-  }).join('');
+  };
+  // itens de um mesmo prato (o próprio prato + opções das subcategorias) ficam num card só
+  const grupos = new Map(), linhas = [];
+  Object.entries(cart).forEach(e => {
+    const g = pratoDoItem(e[0]);
+    if (!g) return linhas.push({ entry: e });
+    if (!grupos.has(g.id)) { grupos.set(g.id, { nome: g.nome, itens: [] }); linhas.push({ grupo: g.id }); }
+    grupos.get(g.id).itens.push(e);
+  });
+  const lotesHTML = LOTES.map((L, i) => `<li class="cgroup"><h4 class="cgroup__h">${esc(L.nome)}</h4><ul class="cgroup__list">${Object.entries(L.itens).map(e => itemCarHTML(e, true, i)).join('')}</ul></li>`).join('');
+  $('#cartList').innerHTML = lotesHTML + linhas.map(l => l.entry ? itemCarHTML(l.entry)
+    : `<li class="cgroup"><h4 class="cgroup__h">${esc(grupos.get(l.grupo).nome)}</h4><ul class="cgroup__list">${grupos.get(l.grupo).itens.map(e => itemCarHTML(e, true)).join('')}</ul></li>`).join('');
 
   const g = Number((CFG.entrega || {}).gratis_acima) || 0;
   const fb = $('#freebar');
@@ -2282,7 +2733,7 @@ function renderCart() {
   $('#sumTotal').textContent = totTxt;
 
   syncControls();
-  $$('[data-tog]').forEach(b => { const on = !!cart[b.dataset.tog]; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', String(on)); });
+  $$('[data-tog]').forEach(b => { const on = !!cart[b.dataset.tog]; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', String(on)); b.closest('.mrow')?.classList.toggle('is-on', on); });
   updateDrinksHeader();
   $('#drinksGo').textContent = hasDrink() ? `Continuar (${brl(c.sub)})`
     : (c.brindeLeft > 0 ? 'Continuar sem escolher o brinde' : 'Continuar sem bebida');
@@ -2344,6 +2795,12 @@ let ofertaId = null;
 function syncOferta() {
   const ctl = $('#ofertaCtl');
   if (!ctl || !ofertaId) return;
+  const pr = pratoDoItem(ofertaId);
+  if (pr) {   // oferta que é prato (tem opções dentro): abre a página do prato em vez de contador
+    ctl.className = 'oferta-ctl'; ctl.removeAttribute('data-ctrl'); ctl.dataset.q = '';
+    ctl.innerHTML = `<button class="btn btn--primary btn--sm ripple" type="button" data-prato="${pr.id}">Escolher</button>`;
+    return;
+  }
   if (cart[ofertaId]) {
     ctl.className = 'gctl oferta-ctl'; ctl.dataset.ctrl = ofertaId; ctl.dataset.q = '-1'; ctl.innerHTML = '';
   } else {
@@ -2428,6 +2885,7 @@ $('#bairroLista').addEventListener('click', e => {
 
 function formOk() {
   const v = id => ($('#' + id)?.value || '').trim();
+  if (faltaMinimo()) return false;
   if (!v('fNome')) return false;
   if (v('fWpp').replace(/\D/g, '').length < 10) return false;
   if (mode === 'entrega' && (!bairroVal() || !v('fRua') || !v('fNum'))) return false;
@@ -2441,12 +2899,12 @@ function updateFinishBtn() {
   const b = $('#btnFinish');
   b.disabled = FECHADA;   // sempre clicável; campos faltando são indicados ao clicar
   $('#btnFinishTxt').textContent = FECHADA ? 'Loja fechada agora'
-    : (formOk() ? 'Enviar pedido pelo WhatsApp' : 'Preencha os dados para prosseguir');
+    : 'Finalizar';
 }
 
 function montaTexto(d, c, fr, server, ref) {
   const semEsp = v => brl(v).replace(/\s/g, '');
-  const linhas = Object.entries(cart).map(([id, q]) => {
+  const linhas = Object.entries(cartAll()).map(([id, q]) => {
     const p = BYID[id], f = c.free[id] || 0, pg = q - f;
     if (f === 0) return `${q}x ${p.nome} — ${semEsp(p.preco * q)}`;
     if (pg === 0) return `${q}x ${p.nome} — GRÁTIS (brinde)`;
@@ -2514,6 +2972,8 @@ const invalid = (sel, msg) => {
 async function finalizar() {
   if (!count()) return toast('Sua sacola está vazia');
   if (FECHADA) return toast('A loja está fechada agora');
+  const fm = faltaMinimo();
+  if (fm) { buzz(30); return toast(`Escolha pelo menos ${fm.min} em ${fm.nome}`); }
   if (DRINKS().length && !drinksSeen && !hasDrink()) return openDrinks('sheet');
 
   const v = id => ($('#' + id)?.value || '').trim();
@@ -2549,7 +3009,7 @@ async function finalizar() {
       server = await rpc('criar_pedido', {
         p_loja: LOJA.id, p_cliente: d.nome, p_tipo: d.tipo, p_bairro: d.bairro, p_rua: d.rua, p_numero: d.num,
         p_pagamento: d.pag, p_troco: d.troco, p_obs: d.obs,
-        p_itens: Object.entries(cart).map(([id, q]) => ({ id: Number(id), q }))
+        p_itens: Object.entries(cartAll()).map(([id, q]) => ({ id: Number(id), q }))
       });
       ref = server.ref;
     } catch (e) {
@@ -2577,7 +3037,7 @@ async function finalizar() {
   const w = window.open(url, '_blank');
   if (!w) location.href = url;
 
-  cart = {}; drinksSeen = false; lastAdded = null; troco = null;
+  cart = {}; LOTES = []; drinksSeen = false; lastAdded = null; troco = null;
   renderCart();
   closeDrinks();
   closeSheet();
@@ -2745,6 +3205,14 @@ function bindEvents() {
     }
     if ((el = hit('[data-tog]'))) {
       const id = el.dataset.tog;
+      const grid = el.closest('[data-max]'), max = grid ? Number(grid.dataset.max) : 0;
+      if (!cart[id] && max > 0 && grid.querySelectorAll('.mrow--check.is-on').length >= max) {
+        const row = el.closest('.mrow');
+        row.classList.remove('shake'); void row.offsetWidth; row.classList.add('shake');
+        toast(max === 1 ? 'Escolha só 1 opção aqui' : `Escolha no máximo ${max} opções aqui`);
+        buzz(30);
+        return;
+      }
       change(Number(id), cart[id] ? -cart[id] : 1);
       return;
     }
@@ -2765,6 +3233,8 @@ function bindEvents() {
     if ((el = hit('[data-dec]'))) { change(Number(el.dataset.dec), -1); return; }
     if ((el = hit('[data-prato]'))) { openPrato(Number(el.dataset.prato)); return; }
     if ((el = hit('[data-grade]'))) { openGrade(Number(el.dataset.grade)); return; }
+    if (hit('[data-pr-inc]')) { pratoMudaQtd(1); return; }
+    if (hit('[data-pr-dec]')) { pratoMudaQtd(-1); return; }
     if ((el = hit('[data-goto]'))) {
       if (el.hasAttribute('data-close-cart')) closeSheet();
       scrollToId(el.dataset.goto);
@@ -2784,7 +3254,9 @@ function bindEvents() {
       return;
     }
     if (hit('[data-open-cart]')) { if (count() && DRINKS().length && !hasDrink()) openDrinks('bar'); else openSheet(); return; }
-    if (hit('[data-grade-cart]')) { closeGrade(); openSheet(); return; }
+    if (hit('[data-grade-cart]')) { if (!fechaPrato()) return; closeGrade(); openSheet(); return; }
+    if ((el = hit('[data-ldec]'))) { const [i, id] = el.dataset.ldec.split(':').map(Number); loteChange(i, id, -1); return; }
+    if ((el = hit('[data-linc]'))) { const [i, id] = el.dataset.linc.split(':').map(Number); loteChange(i, id, 1); return; }
     if ((el = hit('[data-sub-toggle]'))) {
       const box = el.closest('.drink'), op = box.querySelector('.drink-opts');
       const aberto = box.classList.toggle('open');
@@ -2844,9 +3316,13 @@ function bindEvents() {
     else closeSheet();
   });
 
-  $('#searchIn').addEventListener('input', e => filterMenu(e.target.value));
+  $('#searchIn').addEventListener('input', e => {
+    if (cupomAplica(e.target.value)) { e.target.value = ''; filterMenu(''); return; }
+    filterMenu(e.target.value);
+  });
   $('#searchForm').addEventListener('submit', e => {
     e.preventDefault();
+    if (cupomAplica($('#searchIn').value)) { $('#searchIn').value = ''; filterMenu(''); $('#searchIn').blur(); return; }
     filterMenu($('#searchIn').value);
     $('#searchIn').blur();
     scrollToId('cardapio');
@@ -3096,7 +3572,7 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.se
 function subItensHTML(b) {
   if (b.exibicao === 'grade') return `<div class="prato-grade">${b.itens.map(p => gcellHTML(p, false)).join('')}</div>`;
   if (b.exibicao === 'fotos') return `<div class="fotos-list">${b.itens.map(fcellHTML).join('')}</div>`;
-  if (b.exibicao === 'checklist') return `<div class="cat__list checklist-grid">${b.itens.map(checkHTML).join('')}</div>`;
+  if (b.exibicao === 'checklist') return `<div class="cat__list checklist-grid" data-max="${Number(b.max) || 0}">${b.itens.map(checkHTML).join('')}</div>`;
   return `<div class="cat__list prato-page">${b.itens.map((p, i) => cardHTML(p, i, true)).join('')}</div>`;
 }
 /* bloco de subcategoria: título + itens na exibição dela. Minimizado = sanfona (como na Rancharia) */
@@ -3109,8 +3585,9 @@ const rowMinHTML = p => `
   </div>`;
 /* sub minimizado: ícone, título, "a partir de" + preço e seta */
 function subBlockHTML(b) {
-  if (b.exibicao === 'checklist') return `<div class="chk-card"><h3 class="sub-h">${esc(b.nome)}</h3>${subItensHTML(b)}</div>`;
-  if (b.exibicao !== 'min') return `<h3 class="sub-h">${esc(b.nome)}</h3>${subItensHTML(b)}`;
+  const tit = b.nome ? `<h3 class="sub-h">${esc(b.nome)}</h3>` : '';
+  if (b.exibicao === 'checklist') return `<div class="chk-card">${tit}${subItensHTML(b)}</div>`;
+  if (b.exibicao !== 'min') return `${tit}${subItensHTML(b)}`;
   const menor = Math.min(...b.itens.map(p => p.preco));
   return `
     <div class="drink sub-acc">
@@ -3175,6 +3652,7 @@ const secSvg = s => {
 };
 /* página do prato: itens (cards) e subcategorias */
 function openPrato(id) {
+  PRATO_ID = id; PR_MIN = false; PR_ABERTO = false;
   const c = SECS.flatMap(s => s.itens).find(x => x.estilo === 'prato' && x.id === id);
   if (!c) return;
   if ($('#drawer').classList.contains('is-open')) closeMenu();
@@ -3184,13 +3662,14 @@ function openPrato(id) {
   // prato com um único item: já entra na sacola escolhido, sem card no topo
   const auto = c.itens.length === 1 ? c.itens[0] : null;
   if (auto && !cart[auto.id]) change(auto.id, 1);
-  let h = auto ? '' : `<div class="cat__list prato-page">${c.itens.map((p, i) => cardHTML(p, i, true)).join('')}</div>`;
+  let h = (auto || !c.itens.length) ? '' : `<div class="chk-card"><div class="cat__list checklist-grid prato-checks">${c.itens.map(p => checkHTML(p)).join('')}</div></div>`;
   h += subBlocksHTML(c.subs);
   $('#gradeList').className = 'cat__list prato-page';   // lista de 1 coluna (não a grade de 4)
   $('#gradeList').innerHTML = h;
   syncControls();
   document.body.classList.add('lock');
   $('#gradePage').classList.add('is-open'); requestAnimationFrame(() => ajustaGnames($('#gradeList')));
+  renderPratoResumo();
 }
 function openGrade(catId) {
   const g = GRADES.find(x => x.id === catId);
