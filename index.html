@@ -1384,7 +1384,117 @@ body:has(#mBairro.is-open) #ovModal { backdrop-filter: blur(8px); -webkit-backdr
 /* abas e tudo abaixo descem mais 15px */
 .stick-nav { margin-top: 25px !important; }
 
+/* ícones das abas 20% maiores (o círculo e o card continuam do mesmo tamanho) */
+.pill i svg { width: 22px !important; height: 22px !important; }
+
+/* texto do carrossel 3px maior */
+.hslide__in > span { font-size: calc(.68em + 3px) !important; }
+
+/* seções em card; contador ao lado direito do preço; 3 colunas; títulos 3px menores */
+.sec-card { background: var(--white, #fff); border-radius: 24px; padding: 12px; margin: 8px 0 16px; box-shadow: var(--shadow-card); }
+.sec-card .grade, .sec-card .fotos-list { margin: 0; padding: 0; }
+.gpr-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; min-width: 0; }
+.gpr-row .gctl { width: auto; flex: none; }
+.gpr-row .gprice { min-width: 0; }
+.grade--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 8px; }
+.grade--3 .gname { font-size: 13px; }
+.grade--3 .gprice { font-size: 12px; }
+.grade--3 .gctl .add { height: 30px; }
+.fotos-list .fcell__info { flex-direction: row; flex-wrap: wrap; align-items: center; }
+.fotos-list .fcell__info .gname { flex: 1 1 100%; }
+.fotos-list .fcell__info .gpr-row { flex: 1 1 100%; }
+.cat__title { font-size: 27px !important; }
+
+/* contador ao lado do preço: botão fechado com largura certa; aberto (stepper) cresce sem cobrir o preço */
+.gpr-row { flex-wrap: nowrap; }
+.gpr-row .gprice { flex: 1 1 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gpr-row .gctl { width: auto; min-width: 40px; flex: 0 0 auto; margin-top: 0; }
+.gpr-row .gctl .add { width: 40px; height: 30px; font-size: 18px; }
+.gpr-row .gctl .stepper { width: auto; gap: 2px; padding: 0 2px; justify-content: center; }
+.gpr-row .gctl .stepper button { width: 24px; height: 24px; }
+.grade--3 .gpr-row .gctl .add { width: 34px; }
+.grade--3 .gpr-row .gctl .stepper button { width: 20px; height: 20px; }
+.grade--3 .gpr-row .gprice { font-size: 12px; }
+.fotos-list .fcell__info .gpr-row .gctl { width: auto; margin: 0; display: block; }
+.fotos-list .fcell__info .gpr-row .gctl .add { width: 44px; }
+
+/* sem preço nos cards de grade, 2 e 3 colunas (o texto vai para a descrição) */
+.gpr-row .gprice { display: none !important; }
+.gpr-row { justify-content: flex-end; }
+
+/* contador sempre à direita (não centralizado embaixo) */
+.gpr-row .gctl { margin-left: auto; }
+.gpr-row .gctl .add { margin-left: auto; }
+.fotos-list .fcell__info .gpr-row .gctl { display: flex; justify-content: flex-end; width: auto; margin-left: auto; }
+.fotos-list .fcell__info .gpr-row .gctl .stepper { width: auto; justify-content: flex-end; gap: 2px; }
+.fotos-list .fcell__info .gpr-row { justify-content: flex-end; }
+
+/* contador completo (− 0 +) sempre visível nos cards de grade, 2 e 3 colunas */
+.gpr-row .gctl .stepper span { min-width: 16px; text-align: center; font-weight: 700; }
+
+/* títulos das seções 2px menores; abas 5px mais para baixo */
+.cat__title { font-size: 25px !important; }
+.stick-nav { margin-top: 30px !important; }
+
+/* nome dos cards cabe em 3 linhas; altura do card acompanha (o preço/contador fica sempre dentro do card) */
+.gname { -webkit-line-clamp: 3; min-height: calc(1.2em * 3); }
+.gcell { height: 100%; }
+.grade .gcell { align-self: stretch; }
+
+/* logo e botões do cabeçalho 3px menores */
+.topbar .brand { font-size: 20px !important; }
+.topbar .brand.brand--2l { font-size: 16px !important; }
+.topbar .brand.brand--3l { font-size: 14px !important; }
+.topbar .icon-btn { width: 34px !important; height: 34px !important; }
+
+/* botão do app (PWA) do mesmo tamanho do menu hambúrguer */
+.topbar .app-btn { width: 34px !important; height: 34px !important; padding: 0 !important; }
+.topbar .app-btn svg { width: 16px !important; height: 16px !important; }
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap">
+
+/* ajustes: logo, botões do topo, carrossel, margem das seções e primeira dobra */
+.topbar .top-ico { width: 40px !important; height: 36px !important; }
+.topbar .icon-btn, .topbar .app-btn { width: 36px !important; height: 36px !important; }
+.topbar #menuBtn svg { width: 22px !important; height: 17px !important; }
+.hcard { border-radius: 21px !important; }
+.cat { padding-top: 14px !important; }
+@media (min-height: 760px) {
+  .hero { padding-top: 0 !important; }
+  #searchForm.search { margin-top: 10px !important; }
+  .hcard { min-height: 112px !important; }
+  .hcard .htrack, .hcard .hslide { min-height: 112px !important; height: auto !important; }
+  .hcard .hslide { padding: 10px 14px 14px !important; }
+  .stick-nav { margin-top: 14px !important; }
+}
+
+/* checkout: itens sem preço; títulos um pouco mais para baixo */
+.cgroup .citem--sub h4 { padding-top: 6px; }
+/* botão Escolher: 12% mais estreito, amarelo com texto preto */
+.btn-escolher { min-width: 99px !important; background: #ffcc00 !important; color: #000 !important; }
+/* sobra da parte de baixo do card reduzida */
+.plate--card .plate__body { padding: 10px 12px; gap: 2px; }
+
+/* ===== checkout: itens checklist com botão excluir, altura +15%, texto à esquerda ===== */
+.cgroup .citem { position: relative; }
+.cx { display: none; align-items: center; justify-content: center; width: 26px; height: 26px; padding: 0; border-radius: 50%; border: 1.5px solid #000; background: #fff; color: #000; flex: none; }
+.cx svg { width: 11px; height: 11px; }
+.cgroup .citem:not(.citem--sub) .cx { position: absolute; top: 50%; right: 8px; transform: translateY(-50%); }
+.sheet.is-editing .cx { display: flex; }
+.cgroup .citem--sub .cx--check { display: flex; grid-area: x; justify-self: end; position: static; transform: none; }
+.cgroup .citem--sub.is-check { min-height: 32px; padding: 4px 8px 4px 10px; grid-template-columns: 1fr auto; grid-template-areas: "info x"; align-items: center; align-content: center; row-gap: 0; text-align: left; }
+.cgroup .citem--sub.is-check .citem__info { text-align: left; }
+.cgroup .citem--sub.is-check h4 { margin: 0; line-height: 1.2; }
+.sheet-edit { margin-left: auto; margin-right: 10px; border: 0; background: #fff; color: #000; font-weight: 600; font-size: 14px; height: 34px; padding: 0 14px; border-radius: 999px; box-shadow: var(--shadow-sm); }
+.sheet-edit[hidden] { display: none; }
+.cgroup .citem--sub:not(.is-check) { position: relative; }
+.cgroup .citem--sub:not(.is-check) .cx { position: absolute; top: -8px; right: -6px; width: 24px; height: 24px; }
+
+/* checkout: cabeçalho do prato com botão Editar; X só com círculo branco */
+.cgroup__hd { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+.cgroup__hd .cgroup__h { margin: 0; }
+.cgroup__hd .sheet-edit { margin: 0; }
+.cx { border: 0 !important; }
 </style>
 </head>
 
@@ -2059,7 +2169,7 @@ function montaSecoes() {
       const lista = itens.filter(p => p.so_em == null || p.so_em === id);
       if (lista.length) porCat[id].subs.push({ nome: s.nome, itens: lista, exibicao: exib, grupo: (s.cfg.secao || '').trim(), icone: s.cfg.icone || '', max: s.cfg.max_escolha });
     });
-    else secs.push({ nome: s.nome, itens, subs: [], estilo: ['grade', 'fotos'].includes(exib) ? exib : undefined, icone: s.cfg.icone || '', max: s.cfg.max_escolha });
+    else secs.push({ nome: s.nome, itens, subs: [], estilo: ['grade', 'fotos', 'colunas3'].includes(exib) ? exib : undefined, icone: s.cfg.icone || '', max: s.cfg.max_escolha });
   });
   return secs;
 }
@@ -2148,14 +2258,26 @@ function gcellHTML(p, big) {
       <div class="gctl" data-ctrl="${p.id}" data-q="-1"></div>
     </div>`;
 }
+/* célula com o contador ao lado direito do preço (grade, 2 e 3 colunas) */
+function gcellRowHTML(p) {
+  return `
+    <div class="gcell gcell--row" data-search="${esc(norm(p.nome))}">
+      <div class="gimg">${p.foto ? `<img src="${esc(p.foto)}" alt="${esc(p.nome)}" loading="lazy">` : `<span>${ico('plate')}</span>`}</div>
+      <b class="gname">${esc(p.nome)}</b>
+      <div class="gpr-row"><span class="gprice">${brl(p.preco)}</span><div class="gctl" data-ctrl="${p.id}" data-q="-1"></div></div>
+    </div>`;
+}
 function gradeSecHTML(s, idx) {
   const big = s.estilo === 'fotos';
+  const cols = s.estilo === 'colunas3' ? 'grade--3' : 'grade--4';
+  const cellFn = big ? fcellRowHTML : gcellRowHTML;
+  const miolo = big
+    ? `<div class="fotos-list">${s.itens.map(fcellRowHTML).join('')}${subBlocksHTML(s.subs || [])}</div>`
+    : `<div class="grade ${cols} grade--feed">${s.itens.map(gcellRowHTML).join('')}${
+        (s.subs || []).map(b => `<h3 class="sub-h grade-sub">${esc(b.nome)}</h3>` + b.itens.map(gcellRowHTML).join('')).join('')}</div>`;
   return `<section class="cat" id="sec-${idx}" data-cat="${idx}">
       <h2 class="cat__title reveal">${secIcone(s.icone)}${esc(s.nome)}</h2>
-      ${big
-        ? `<div class="fotos-list">${s.itens.map(fcellHTML).join('')}${subBlocksHTML(s.subs || [])}</div>`
-        : `<div class="grade grade--4 grade--feed">${s.itens.map(p => gcellHTML(p, false)).join('')}${
-        (s.subs || []).map(b => `<h3 class="sub-h grade-sub">${esc(b.nome)}</h3>` + b.itens.map(p => gcellHTML(p, false)).join('')).join('')}</div>`}
+      <div class="sec-card">${miolo}</div>
     </section>`;
 }
 
@@ -2188,7 +2310,7 @@ function pratoHTML(c) {
     </article>`;
 }
 function secHTML(s, idx) {
-  if (s.estilo === 'grade' || s.estilo === 'fotos') return gradeSecHTML(s, idx);
+  if (s.estilo === 'grade' || s.estilo === 'fotos' || s.estilo === 'colunas3') return gradeSecHTML(s, idx);
   if (s.estilo === 'pratos') {
     return `<section class="cat" id="sec-${idx}" data-cat="${idx}">
       <h2 class="cat__title reveal">${secIcone(s.icone)}${esc(s.nome)}${ico('chev')}</h2>
@@ -2586,6 +2708,26 @@ function pratoItens() {
   if (!PRATO_ID) return [];
   return PRODS.filter(p => cart[p.id] && (p.cat.id === PRATO_ID || (pratoDoItem(p.id) || {}).id === PRATO_ID));
 }
+let PR_SNAP = null;   // estado da sacola antes de abrir o prato (Voltar desfaz a seleção não confirmada)
+function pratoSnapshot(keep) { if (keep && PR_SNAP) return; PR_SNAP = { cart: { ...cart }, lotes: JSON.parse(JSON.stringify(LOTES)) }; }
+function restauraPrato() {
+  if (!PR_SNAP) return;
+  Object.keys(cart).forEach(k => delete cart[k]);
+  Object.assign(cart, PR_SNAP.cart);
+  LOTES.splice(0, LOTES.length, ...PR_SNAP.lotes);
+  PR_SNAP = null;
+}
+function pratoTotal() { return pratoItens().reduce((a, p) => a + p.preco * cart[p.id], 0); }
+/* Editar: tira o prato da sacola e devolve as escolhas para o cardápio já marcadas */
+function editarPrato(pid, li) {
+  pratoSnapshot(false);
+  if (li !== null && LOTES[li]) {
+    Object.entries(LOTES[li].itens).forEach(([k, q]) => { cart[k] = q; });
+    LOTES.splice(li, 1);
+  }
+  openPrato(pid, true);
+  renderCart();
+}
 function fechaPrato() {
   const itens = pratoItens(); if (!itens.length) return true;
   const fm = faltaMinimo();
@@ -2593,7 +2735,7 @@ function fechaPrato() {
   const o = {};
   itens.forEach(p => { o[p.id] = cart[p.id]; delete cart[p.id]; });
   LOTES.push({ nome: (CATS.find(c => c.id === PRATO_ID) || {}).nome || 'Prato', itens: o });
-  PR_MIN = false; lastAdded = null;
+  PR_MIN = false; lastAdded = null; PR_SNAP = null;
   renderCart(); renderPratoResumo();
   return true;
 }
@@ -2693,17 +2835,20 @@ function renderCart() {
       : pg === 0 ? `<s>${brl(p.preco * q)}</s><span class="free-tag">Grátis</span>`
       : `${brl(p.preco * pg)}<small>${fr} grátis</small>`;
     const tipo = dentro ? (p.cat.cfg.exibicao === 'prato' ? ' citem--main' : ' citem--sub') : '';
-    const zeroSub = tipo === ' citem--sub' && !(p.preco > 0);
+    const zeroSub = tipo === ' citem--sub' && p.cat.cfg.exibicao === 'checklist';
     const sub = tipo === ' citem--sub';
     const dA = li !== null ? `data-ldec="${li}:${id}"` : `data-dec="${id}"`, iA = li !== null ? `data-linc="${li}:${id}"` : `data-inc="${id}"`;
-    return `<li class="citem${tipo}${Number(id) === lastAdded ? ' citem--new' : ''}">
+    const xA = li !== null ? `data-lxdel="${li}:${id}"` : `data-xdel="${id}"`;
+    const xBtn = `<button class="cx ripple${zeroSub ? ' cx--check' : ''}" type="button" ${xA} aria-label="Excluir item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
+    return `<li class="citem${tipo}${zeroSub ? ' is-check' : ''}${Number(id) === lastAdded ? ' citem--new' : ''}">
       ${sub ? '' : `<div class="tile" style="--tile:${PAL[p.id % PAL.length]}">${mediaHTML(p)}</div>`}
       <div class="citem__info"><h4>${esc(nomeItem(p))}</h4>${sub || zeroSub ? '' : `<small>${brl(p.preco)} cada</small>`}</div>
-      <div class="stepper">
+      ${zeroSub ? xBtn : ''}
+      ${zeroSub ? '' : `<div class="stepper">
         <button class="ripple" type="button" ${dA} aria-label="Remover um">−</button>
         <span>${q}</span>
         <button class="ripple" type="button" ${iA} aria-label="Adicionar mais um">+</button>
-      </div>
+      </div>`}
       ${zeroSub ? '' : `<strong class="citem__sum">${soma}</strong>`}
     </li>`;
   };
@@ -2715,9 +2860,16 @@ function renderCart() {
     if (!grupos.has(g.id)) { grupos.set(g.id, { nome: g.nome, itens: [] }); linhas.push({ grupo: g.id }); }
     grupos.get(g.id).itens.push(e);
   });
-  const lotesHTML = LOTES.map((L, i) => `<li class="cgroup"><h4 class="cgroup__h">${esc(L.nome)}</h4><ul class="cgroup__list">${Object.entries(L.itens).map(e => itemCarHTML(e, true, i)).join('')}</ul></li>`).join('');
+  // ordem: prato principal primeiro, depois as subcategorias na ordem do painel (proteína, salada, lata)
+  const ordemCarrinho = entries => entries.slice().sort((a, b) => {
+    const pa = BYID[a[0]], pb = BYID[b[0]];
+    const ma = pa.cat.cfg.exibicao === 'prato' ? 0 : 1, mb = pb.cat.cfg.exibicao === 'prato' ? 0 : 1;
+    return ma !== mb ? ma - mb : CATS.indexOf(pa.cat) - CATS.indexOf(pb.cat);
+  });
+  grupos.forEach(g => { g.itens = ordemCarrinho(g.itens); });
+  const lotesHTML = LOTES.map((L, i) => `<li class="cgroup"><div class="cgroup__hd"><h4 class="cgroup__h">${esc(L.nome)}</h4>${(() => { const pid = pratoDoItem(Object.keys(L.itens)[0]); return pid ? `<button class="sheet-edit" type="button" data-edit-prato="${pid.id}" data-edit-li="${i}">Editar</button>` : ''; })()}</div><ul class="cgroup__list">${ordemCarrinho(Object.entries(L.itens)).map(e => itemCarHTML(e, true, i)).join('')}</ul></li>`).join('');
   $('#cartList').innerHTML = lotesHTML + linhas.map(l => l.entry ? itemCarHTML(l.entry)
-    : `<li class="cgroup"><h4 class="cgroup__h">${esc(grupos.get(l.grupo).nome)}</h4><ul class="cgroup__list">${grupos.get(l.grupo).itens.map(e => itemCarHTML(e, true)).join('')}</ul></li>`).join('');
+    : `<li class="cgroup"><div class="cgroup__hd"><h4 class="cgroup__h">${esc(grupos.get(l.grupo).nome)}</h4><button class="sheet-edit" type="button" data-edit-prato="${l.grupo}" data-edit-li="">Editar</button></div><ul class="cgroup__list">${grupos.get(l.grupo).itens.map(e => itemCarHTML(e, true)).join('')}</ul></li>`).join('');
 
   const g = Number((CFG.entrega || {}).gratis_acima) || 0;
   const fb = $('#freebar');
@@ -2731,6 +2883,8 @@ function renderCart() {
   $('#sumSub').textContent = brl(c.sub);
   $('#sumFee').textContent = f.txt;
   $('#sumTotal').textContent = totTxt;
+  const goBtn = document.querySelector('.grade-bar__go');
+  if (goBtn && PRATO_ID) goBtn.firstChild.textContent = 'Prosseguir · ' + brl(pratoTotal());
 
   syncControls();
   $$('[data-tog]').forEach(b => { const on = !!cart[b.dataset.tog]; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', String(on)); b.closest('.mrow')?.classList.toggle('is-on', on); });
@@ -2771,8 +2925,15 @@ function syncControls() {
     const id = el.dataset.ctrl, q = cart[id] || 0;
     if (el.dataset.q === String(q)) return;
     el.dataset.q = q;
-    el.innerHTML = ctrlHTML(id);
+    el.innerHTML = el.closest('.gpr-row') ? ctrlFullHTML(id, q) : ctrlHTML(id);   // grade/2/3 colunas: sempre no formato completo
   });
+}
+function ctrlFullHTML(id, q) {
+  return `<div class="stepper">
+    <button class="ripple" type="button" data-dec="${id}" aria-label="Remover um">−</button>
+    <span>${q}</span>
+    <button class="ripple" type="button" data-inc="${id}" aria-label="Adicionar mais um">+</button>
+  </div>`;
 }
 
 /* ===== 9. TELA DE BEBIDAS / BRINDES ===== */
@@ -3255,6 +3416,9 @@ function bindEvents() {
     }
     if (hit('[data-open-cart]')) { if (count() && DRINKS().length && !hasDrink()) openDrinks('bar'); else openSheet(); return; }
     if (hit('[data-grade-cart]')) { if (!fechaPrato()) return; closeGrade(); openSheet(); return; }
+    if ((el = hit('[data-xdel]'))) { change(Number(el.dataset.xdel), -999); return; }
+    if ((el = hit('[data-lxdel]'))) { const [i, id] = el.dataset.lxdel.split(':').map(Number); loteChange(i, id, -999); return; }
+    if ((el = hit('[data-edit-prato]'))) { const li = el.dataset.editLi; editarPrato(Number(el.dataset.editPrato), li ? Number(li) : null); closeSheet(); return; }
     if ((el = hit('[data-ldec]'))) { const [i, id] = el.dataset.ldec.split(':').map(Number); loteChange(i, id, -1); return; }
     if ((el = hit('[data-linc]'))) { const [i, id] = el.dataset.linc.split(':').map(Number); loteChange(i, id, 1); return; }
     if ((el = hit('[data-sub-toggle]'))) {
@@ -3265,7 +3429,7 @@ function bindEvents() {
       if (aberto) syncControls();
       return;
     }
-    if (hit('[data-close-grade]')) { closeGrade(); return; }
+    if (hit('[data-close-grade]')) { restauraPrato(); closeGrade(); renderCart(); return; }
     if (hit('[data-close-cart]')) { closeSheet(); return; }
     if ((el = hit('[data-mode]'))) {
       mode = el.dataset.mode;
@@ -3300,7 +3464,7 @@ function bindEvents() {
     closeDrinks();
     if (drinksFrom === 'bar') openSheet(); else finalizar();
   });
-  $('#gradeBack').addEventListener('click', closeGrade);
+  $('#gradeBack').addEventListener('click', () => { restauraPrato(); closeGrade(); renderCart(); });
   $('#btnApp').addEventListener('click', () => { if (deferredInstall) { deferredInstall.prompt(); deferredInstall = null; } else openModal('mApp'); });
   $('#appOk').addEventListener('click', closeModals);
   $('#doneOk').addEventListener('click', fechaDone);
@@ -3634,6 +3798,16 @@ function subBlocksHTML(subs) {
   return h;
 }
 /* Fotos dos itens: uma foto grande por item, uma coluna */
+function fcellRowHTML(p) {
+  return `
+    <div class="fcell" data-search="${esc(norm(p.nome))}">
+      <div class="fcell__img">${p.foto ? `<img src="${esc(p.foto)}" alt="${esc(p.nome)}" loading="lazy">` : `<span>${ico('plate')}</span>`}</div>
+      <div class="fcell__info">
+        <b class="gname">${esc(p.nome)}</b>
+        <div class="gpr-row"><span class="gprice">${brl(p.preco)}</span><div class="gctl" data-ctrl="${p.id}" data-q="-1"></div></div>
+      </div>
+    </div>`;
+}
 function fcellHTML(p) {
   return `
     <div class="fcell" data-search="${esc(norm(p.nome))}">
@@ -3651,7 +3825,8 @@ const secSvg = s => {
   return i ? `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${i.p}</svg>` : ico('plate');
 };
 /* página do prato: itens (cards) e subcategorias */
-function openPrato(id) {
+function openPrato(id, keep) {
+  pratoSnapshot(keep);
   PRATO_ID = id; PR_MIN = false; PR_ABERTO = false;
   const c = SECS.flatMap(s => s.itens).find(x => x.estilo === 'prato' && x.id === id);
   if (!c) return;
